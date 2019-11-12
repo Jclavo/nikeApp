@@ -22,12 +22,13 @@ export class FirebaseService {
         this.resultRAW = res;
 
         return this.resultObservable = this.resultRAW.map(userData => {
-          return new ItemModel(
-            userData.payload.doc.id,
-            userData.payload.doc.data().name,
-            userData.payload.doc.data().lastname,
-            userData.payload.doc.data().age,
-          );
+          return new ItemModel();
+          // return new ItemModel(
+          //   userData.payload.doc.id,
+          //   userData.payload.doc.data().name,
+          //   userData.payload.doc.data().lastname,
+          //   userData.payload.doc.data().age,
+          // );
 
         });
       }));
@@ -36,13 +37,13 @@ export class FirebaseService {
   getUser(id: string): Observable<ItemModel> {
     return this.afs.collection('/users').doc<ItemModel>(id).valueChanges()
       .pipe(map(userData => {
-
-        return new ItemModel(
-          id,
-          userData.name,
-          userData.lastname,
-          userData.age
-        );
+        return new ItemModel();
+        // return new ItemModel(
+        //   id,
+        //   userData.name,
+        //   userData.lastname,
+        //   userData.age
+        // );
 
       }));
   }
@@ -51,8 +52,8 @@ export class FirebaseService {
 
     return this.afs.collection('/users').add({
       name: user.name,
-      lastname: user.lastname,
-      age: user.age,
+      // lastname: user.lastname,
+      // age: user.age,
     });
   }
 
@@ -68,8 +69,8 @@ export class FirebaseService {
 
     return this.afs.collection('/users').doc(user.id).set({
       name: user.name,
-      lastname: user.lastname,
-      age: user.age,
+      // lastname: user.lastname,
+      // age: user.age,
     });
   }
 

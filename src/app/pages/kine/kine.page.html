@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>XXX</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form #form="ngForm" (ngSubmit)="saveItem(form,$event)" method="post" id="formItem">
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Name:</ion-label>
+        <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name" placeholder="name"
+          maxlength="50">
+        </ion-input>
+        <ion-icon name="person" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Phone:</ion-label>
+        <ion-input position="floating" type="text" name="phone" required clearInput [(ngModel)]="item.phone" placeholder="phone"
+          maxlength="15">
+        </ion-input>
+        <ion-icon name="phone-portrait" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Address:</ion-label>
+        <ion-input position="floating" type="text" name="address" required clearInput [(ngModel)]="item.address"
+          placeholder="address" maxlength="50">
+        </ion-input>
+        <ion-icon name="home" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Price:</ion-label>
+        <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price" placeholder="price">
+        </ion-input>
+        <ion-icon name="cash" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-row class="ion-text-center">
+
+      <ion-col col-6>
+        <ion-button expand="full" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
+      </ion-col>
+      <ion-col col-6>
+        <ion-button expand="full" color="danger" routerLink="/home">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>
