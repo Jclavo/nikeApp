@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
-import { UserModel } from '../models/User.model';
+import { ItemModel } from '../models/item.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,11 +10,11 @@ import { Observable } from 'rxjs';
 export class FirebaseService {
 
   private resultRAW: any;
-  private resultObservable: Observable<UserModel[]>;
+  private resultObservable: Observable<ItemModel[]>;
 
   constructor(private afs: AngularFirestore) { }
 
-  getUsers(): Observable<UserModel[]> {
+  getUsers(): Observable<ItemModel[]> {
 
     return this.afs.collection('/users').snapshotChanges()
       .pipe(map(res => {
@@ -22,7 +22,7 @@ export class FirebaseService {
         this.resultRAW = res;
 
         return this.resultObservable = this.resultRAW.map(userData => {
-          return new UserModel(
+          return new ItemModel(
             userData.payload.doc.id,
             userData.payload.doc.data().name,
             userData.payload.doc.data().lastname,
@@ -33,11 +33,11 @@ export class FirebaseService {
       }));
   }
 
-  getUser(id: string): Observable<UserModel> {
-    return this.afs.collection('/users').doc<UserModel>(id).valueChanges()
+  getUser(id: string): Observable<ItemModel> {
+    return this.afs.collection('/users').doc<ItemModel>(id).valueChanges()
       .pipe(map(userData => {
 
-        return new UserModel(
+        return new ItemModel(
           id,
           userData.name,
           userData.lastname,
@@ -47,7 +47,7 @@ export class FirebaseService {
       }));
   }
 
-  saveUser(user: UserModel): Promise<DocumentReference> {
+  saveUser(user: ItemModel): Promise<DocumentReference> {
 
     return this.afs.collection('/users').add({
       name: user.name,
@@ -56,7 +56,7 @@ export class FirebaseService {
     });
   }
 
-  updateUser(user: UserModel): Promise<void> {
+  updateUser(user: ItemModel): Promise<void> {
 
     // return this.afs.collection('/users').update(
     //   user.id,
