@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
-import { ItemModel } from '../models/item.model';
+import { ItemModel } from '../../models/item.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class ItemService {
+
+  private static COLLECTION_NAME: string = "/items"
 
   private resultRAW: any;
   private resultObservable: Observable<ItemModel[]>;
@@ -35,7 +37,7 @@ export class FirebaseService {
   }
 
   getUser(id: string): Observable<ItemModel> {
-    return this.afs.collection('/users').doc<ItemModel>(id).valueChanges()
+    return this.afs.collection(ItemService.COLLECTION_NAME).doc<ItemModel>(id).valueChanges()
       .pipe(map(userData => {
         return new ItemModel();
         // return new ItemModel(
@@ -48,9 +50,9 @@ export class FirebaseService {
       }));
   }
 
-  createItem(item: ItemModel): Promise<DocumentReference> {
+  create(item: ItemModel): Promise<DocumentReference> {
 
-    return this.afs.collection('/items').add({
+    return this.afs.collection(ItemService.COLLECTION_NAME).add({
       name:item.name,
       phone:item.phone,
       address:item.address,
