@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class ConstantService {
 
-  public COLLECTION_NAME: string = "/items"
+  public COLLECTION_NAME_ITEMS: string = "/items"
+  public COLLECTION_NAME_LOCATIONS: string = "/locations"
 
   constructor() { }
 }

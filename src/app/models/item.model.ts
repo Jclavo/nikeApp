@@ -19,19 +19,4 @@ export class ItemModel {
         this.price = price;
     }
 
-    // constructor() {
-    // }
-
-    // load(id: string,
-    //     name: string,
-    //     phone: string,
-    //     address: string,
-    //     price: number) {
-
-    //     this.id = id;
-    //     this.name = name;
-    //     this.phone = phone;
-    //     this.address = address;
-    //     this.price = price;
-    // }
 }

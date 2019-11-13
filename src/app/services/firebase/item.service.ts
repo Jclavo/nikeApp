@@ -21,7 +21,7 @@ export class ItemService {
 
   getAll(): Observable<ItemModel[]> {
 
-    return this.afs.collection(this.constant.COLLECTION_NAME).snapshotChanges()
+    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).snapshotChanges()
       .pipe(map(res => {
 
         this.resultRAW = res;
@@ -41,7 +41,7 @@ export class ItemService {
   }
 
   get(id: string): Observable<ItemModel> {
-    return this.afs.collection(this.constant.COLLECTION_NAME).doc<ItemModel>(id).valueChanges()
+    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc<ItemModel>(id).valueChanges()
       .pipe(map(itemData => {
         
         return new ItemModel(
@@ -57,7 +57,7 @@ export class ItemService {
 
   create(item: ItemModel): Promise<DocumentReference> {
 
-    return this.afs.collection('/items').add({
+    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).add({
       name:item.name,
       phone:item.phone,
       address:item.address,
@@ -75,7 +75,7 @@ export class ItemService {
     //   age: user.age,
     // });
 
-    return this.afs.collection(this.constant.COLLECTION_NAME).doc(item.id).set({
+    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc(item.id).set({
       name: item.name,
       phone:item.phone,
       address:item.address,
@@ -85,6 +85,6 @@ export class ItemService {
 
   delete(id: string): Promise<void>
   {
-    return this.afs.collection(this.constant.COLLECTION_NAME).doc(id).delete();
+    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc(id).delete();
   }
 }
