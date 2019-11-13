@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { ItemService } from 'src/app/services/firebase/item.service';
 
@@ -14,12 +14,27 @@ import { ItemModel } from '../../models/item.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel();
+  private item = new ItemModel('','','','',0);
 
   constructor(private itemService: ItemService,
-              private router: Router) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.item.id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (this.item.id) {
+      console.log('User', this.item.id);
+      this.itemService.get(this.item.id).subscribe(dataItem => {
+        this.item = dataItem;
+      });
+    }
+    // else {
+    //   console.log('User Empty', this.user.id);
+
+    // }
+
   }
 
   save(formItem: NgForm) {
@@ -30,10 +45,10 @@ export class KinePage implements OnInit {
     this.item.price = formItem.value.price;
 
     if (this.item.id) {
-      this.itemService.updateUser(this.item).then(() => {
+      this.itemService.update(this.item).then(() => {
         //this.router.navigateByUrl('/');
-        //this.router.navigate(['/home']);
         console.log('Item updated');
+        this.router.navigate(['/home']);
         //this.showToast('Idea added');
       }, err => {
         //this.showToast('There was a problem adding your idea :(');
@@ -43,8 +58,8 @@ export class KinePage implements OnInit {
     else {
       this.itemService.create(this.item).then(() => {
         //this.router.navigateByUrl('/');
-        this.router.navigate(['/home']);
         console.log('Item added');
+        this.router.navigate(['/home']);
         //this.showToast('Idea added');
       }, err => {
         //this.showToast('There was a problem adding your idea :(');
