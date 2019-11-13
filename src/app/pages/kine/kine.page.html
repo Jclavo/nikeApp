@@ -11,8 +11,8 @@
     <ion-card>
       <ion-item>
         <ion-label stacked>Name:</ion-label>
-        <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name" placeholder="name"
-          maxlength="50">
+        <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name"
+          placeholder="name" maxlength="50">
         </ion-input>
         <ion-icon name="person" item-start></ion-icon>
       </ion-item>
@@ -21,8 +21,8 @@
     <ion-card>
       <ion-item>
         <ion-label stacked>Phone:</ion-label>
-        <ion-input position="floating" type="text" name="phone" required clearInput [(ngModel)]="item.phone" placeholder="phone"
-          maxlength="15">
+        <ion-input position="floating" type="text" name="phone" required clearInput [(ngModel)]="item.phone"
+          placeholder="phone" maxlength="15">
         </ion-input>
         <ion-icon name="phone-portrait" item-start></ion-icon>
       </ion-item>
@@ -41,9 +41,44 @@
     <ion-card>
       <ion-item>
         <ion-label stacked>Price:</ion-label>
-        <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price" placeholder="price">
+        <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price"
+          placeholder="price">
         </ion-input>
         <ion-icon name="cash" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+
+        <ion-col col-5>
+          <ion-label stacked>Latitude:</ion-label>
+          <ion-input position="floating" type="text" name="latitude" required clearInput [(ngModel)]="item.price"
+            placeholder="latitude">
+          </ion-input>
+        </ion-col>
+        <ion-col col-5>
+            <ion-label stacked>Longuitude:</ion-label>
+            <ion-input position="floating" type="text" name="longuitude" required clearInput [(ngModel)]="item.price"
+              placeholder="longuitude">
+            </ion-input>
+          </ion-col>
+
+        <!-- <ion-col col-1 class="ion-text-center">
+            <ion-button title="Pin" expand="full">
+              <ion-icon slot="icon-only" name="pin" ></ion-icon>
+            </ion-button>
+        </ion-col>
+
+        <ion-col col-1 class="ion-text-center">
+            <ion-button title="Map" expand="full">
+              <ion-icon slot="icon-only" name="Map" ></ion-icon>
+            </ion-button>
+        </ion-col> -->
+
+        <ion-icon name="pin" item-start></ion-icon>
+        <ion-icon name="map" item-start></ion-icon>
+
       </ion-item>
     </ion-card>
 
