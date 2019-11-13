@@ -27,7 +27,7 @@ export class LocationService {
         this.resultRAW = res;
 
         return this.resultObservable = this.resultRAW.map(locationData => {
-          
+
           return new LocationModel(
             locationData.payload.doc.id,
             locationData.payload.doc.data().name,
@@ -36,48 +36,47 @@ export class LocationService {
             locationData.payload.doc.data().price
           );
 
-         });
+        });
       }));
   }
 
   get(id: string): Observable<LocationModel> {
     return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).doc<LocationModel>(id).valueChanges()
       .pipe(map(locationData => {
-        
+
         return new LocationModel(
           id,
           locationData.name,
           locationData.latitude,
-          locationData.longuitude,
+          locationData.longitude,
           locationData.active
         );
 
       }));
   }
 
-  create(item: LocationModel): Promise<DocumentReference> {
+  create(location: LocationModel): Promise<DocumentReference> {
 
     return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).add({
-      name:item.name,
-      phone:item.latitude,
-      address:item.longuitude,
-      price:item.active
+      latitude: location.latitude,
+      longitude: location.longitude,
+      name: location.name,
+      active: location.active
     });
   }
 
-  update(item: LocationModel): Promise<void> {
+  update(location: LocationModel): Promise<void> {
 
 
-    return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).doc(item.id).set({
-      name: item.name,
-      phone:item.latitude,
-      address:item.longuitude,
-      price:item.active
+    return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).doc(location.id).set({
+      latitude: location.latitude,
+      longitude: location.longitude,
+      name: location.name,
+      active: location.active
     });
   }
 
-  delete(id: string): Promise<void>
-  {
+  delete(id: string): Promise<void> {
     return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).doc(id).delete();
   }
 }

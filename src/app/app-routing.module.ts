@@ -6,7 +6,8 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
   { path: 'kine', loadChildren: './pages/kine/kine.module#KinePageModule' },
   { path: 'kine/:id', loadChildren: './pages/kine/kine.module#KinePageModule' },
-  { path: 'kine-list', loadChildren: './pages/kine-list/kine-list.module#KineListPageModule' },
+  { path: 'kine-list', loadChildren: './pages/kine-list/kine-list.module#KineListPageModule' },  { path: 'location', loadChildren: './pages/location/location.module#LocationPageModule' },
+
 
 ];
 

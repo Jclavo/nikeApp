@@ -1,0 +1,24 @@
+/*ion-toolbar{
+    text-align: center;
+}*/
+
+form, input, optgroup, select {
+    margin-top: 20px;
+    margin-left: 22px;
+    margin-right: 22px;
+}
+
+ion-select, ion-input, ion-datetime, ion-item {
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    background: #fbfbfb;
+    height: 38px;
+    margin-bottom: 23px;
+    margin-top: 1px;
+    width: 100%;  
+}
+
+.small {
+    font-weight: small;
+    font-size: 10px;
+  }

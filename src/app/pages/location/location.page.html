@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form #form="ngForm" (ngSubmit)="save(form)" method="post" id="formLocation">
+
+    <ion-grid>
+
+      <ion-row>
+
+        <ion-col size="6">
+          <ion-label position="stacked">Latitude:</ion-label>
+          <ion-input class="ion-text-wrap" type="text" clearInput [(ngModel)]="location.latitude" name="latitude">
+          </ion-input>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-label position="stacked">Longitude:</ion-label>
+          <ion-input class="ion-text-wrap" type="text" clearInput [(ngModel)]="location.longitude" name="longitude">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="9">
+          <ion-label position="stacked">Name:</ion-label>
+          <ion-input class="ion-text-wrap" type="text" clearInput [(ngModel)]="location.name" name="name">
+          </ion-input>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label position="stacked">Active:</ion-label>
+          <ion-toggle [(ngModel)]="location.active" name="active"></ion-toggle>
+        </ion-col>
+        
+      </ion-row>
+
+      <ion-row class="ion-text-center">
+
+        <ion-col col-6>
+          <ion-button expand="full" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
+        </ion-col>
+        <ion-col col-6>
+          <ion-button expand="full" color="danger" routerLink="/home">Cancel</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </form>
+
+  <ion-title>Location List</ion-title>
+  <ion-list>
+      <ion-item *ngFor="let position of positions" >
+        <ion-label>
+          {{ item.name }}
+        </ion-label>
+
+        <ion-button routerLink="/location">
+          <ion-icon slot="icon-only" name="map"></ion-icon>
+        </ion-button>
+  
+        <ion-button title="Edit" [routerLink]="['/kine', item.id]">
+          <ion-icon slot="icon-only" name="create" ></ion-icon>
+        </ion-button>
+  
+        <ion-button color="danger" title="Delete" (click)="delete(item.id)">
+          <ion-icon slot="icon-only" name="trash" ></ion-icon>
+        </ion-button>
+  
+      </ion-item>
+    </ion-list>
+
+</ion-content>
