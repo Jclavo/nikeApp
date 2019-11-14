@@ -40,6 +40,29 @@ export class LocationService {
       }));
   }
 
+  getAllActive(): Observable<LocationModel[]> {
+
+    return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS,
+      ref => ref.where("active", "==", true))
+      .snapshotChanges()
+      .pipe(map(res => {
+
+        this.resultRAW = res;
+
+        return this.resultObservable = this.resultRAW.map(locationData => {
+
+          return new LocationModel(
+            locationData.payload.doc.id,
+            locationData.payload.doc.data().name,
+            locationData.payload.doc.data().phone,
+            locationData.payload.doc.data().address,
+            locationData.payload.doc.data().price
+          );
+
+        });
+      }));
+  }
+
   get(id: string): Observable<LocationModel> {
     return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).doc<LocationModel>(id).valueChanges()
       .pipe(map(locationData => {

@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ItemService } from 'src/app/services/firebase/item.service';
+import { LocationService } from 'src/app/services/firebase/location.service';
 
+import { LocationModel } from '../../models/location.model';
 import { ItemModel } from '../../models/item.model';
-
 
 @Component({
   selector: 'app-kine',
@@ -14,11 +15,13 @@ import { ItemModel } from '../../models/item.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel('','','','',0);
+  private item = new ItemModel('', '', '', '', 0, '');
+  private locations: Array<LocationModel>;
 
   constructor(private itemService: ItemService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+    private locationService: LocationService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -34,6 +37,8 @@ export class KinePage implements OnInit {
     //   console.log('User Empty', this.user.id);
 
     // }
+
+    this.getAllActiveLocations();
 
   }
 
@@ -67,6 +72,23 @@ export class KinePage implements OnInit {
       });
     }
 
+  }
+
+  getAllActiveLocations() {
+    this.locationService.getAllActive().subscribe(dataLocations => {
+      //this.loading = false;
+      if (dataLocations) {
+        this.locations = dataLocations;
+      }
+
+      console.log("locations: ", this.locations);
+    });
+  }
+
+  selectLocation(id: string) {
+    console.log(id)
+    // this.location.latitude = latitude;
+    // this.location.longuitude = longuitude;
   }
 
 }

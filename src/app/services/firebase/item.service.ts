@@ -33,7 +33,8 @@ export class ItemService {
             itemData.payload.doc.data().name,
             itemData.payload.doc.data().phone,
             itemData.payload.doc.data().address,
-            itemData.payload.doc.data().price
+            itemData.payload.doc.data().price,
+            itemData.payload.doc.data().location
           );
 
          });
@@ -49,7 +50,8 @@ export class ItemService {
           itemData.name,
           itemData.phone,
           itemData.address,
-          itemData.price
+          itemData.price,
+          itemData.location
         );
 
       }));
@@ -61,7 +63,8 @@ export class ItemService {
       name:item.name,
       phone:item.phone,
       address:item.address,
-      price:item.price
+      price:item.price,
+      location:item.location
     });
   }
 
@@ -79,7 +82,8 @@ export class ItemService {
       name: item.name,
       phone:item.phone,
       address:item.address,
-      price:item.price
+      price:item.price,
+      location:item.location
     });
   }
 

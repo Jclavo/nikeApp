@@ -50,6 +50,20 @@
 
     <ion-card>
       <ion-item>
+        <ion-label stacked>Location:</ion-label>
+        <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)"
+          placeholder="Select a location">
+          <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
+            {{location.name}}
+          </ion-select-option>
+        </ion-select>
+        <ion-icon name="pin" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-item>
 
         <ion-col col-5>
           <ion-label stacked>Latitude:</ion-label>
@@ -58,11 +72,11 @@
           </ion-input>
         </ion-col>
         <ion-col col-5>
-            <ion-label stacked>Longuitude:</ion-label>
-            <ion-input position="floating" type="text" name="longuitude" required clearInput [(ngModel)]="item.price"
-              placeholder="longuitude">
-            </ion-input>
-          </ion-col>
+          <ion-label stacked>Longuitude:</ion-label>
+          <ion-input position="floating" type="text" name="longuitude" required clearInput [(ngModel)]="item.price"
+            placeholder="longuitude">
+          </ion-input>
+        </ion-col>
 
         <!-- <ion-col col-1 class="ion-text-center">
             <ion-button title="Pin" expand="full">
@@ -76,13 +90,13 @@
             </ion-button>
         </ion-col> -->
 
-        <ion-icon name="pin" item-start></ion-icon>
+        <!-- <ion-icon name="pin" item-start></ion-icon> -->
         <ion-icon name="map" item-start></ion-icon>
 
       </ion-item>
     </ion-card>
 
-    <ion-row class="ion-text-center"> 
+    <ion-row class="ion-text-center">
 
       <ion-col col-6>
         <ion-button expand="full" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
