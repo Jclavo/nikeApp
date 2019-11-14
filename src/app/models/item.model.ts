@@ -6,13 +6,17 @@ export class ItemModel {
     public address: string;
     public price: number;
     public location: string;
+    public latitude: string;
+    public longitude: string;
 
     constructor(id: string,
         name: string,
         phone: string,
         address: string,
         price: number,
-        location: string) {
+        location: string,
+        latitude: string,
+        longitude: string) {
 
         this.id = id;
         this.name = name;
@@ -20,6 +24,14 @@ export class ItemModel {
         this.address = address;
         this.price = price;
         this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
+
+    // constructor()
+    // {
+
+    // }
+
 
 }

@@ -34,7 +34,9 @@ export class ItemService {
             itemData.payload.doc.data().phone,
             itemData.payload.doc.data().address,
             itemData.payload.doc.data().price,
-            itemData.payload.doc.data().location
+            itemData.payload.doc.data().location,
+            itemData.payload.doc.data().latitude,
+            itemData.payload.doc.data().longitude
           );
 
          });
@@ -51,7 +53,9 @@ export class ItemService {
           itemData.phone,
           itemData.address,
           itemData.price,
-          itemData.location
+          itemData.location,
+          itemData.latitude,
+          itemData.longitude
         );
 
       }));
@@ -64,7 +68,9 @@ export class ItemService {
       phone:item.phone,
       address:item.address,
       price:item.price,
-      location:item.location
+      location:item.location,
+      latitude:item.latitude,
+      longitude:item.longitude
     });
   }
 
@@ -83,7 +89,9 @@ export class ItemService {
       phone:item.phone,
       address:item.address,
       price:item.price,
-      location:item.location
+      location:item.location,
+      latitude:item.latitude,
+      longitude:item.longitude
     });
   }
 

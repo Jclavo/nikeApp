@@ -15,13 +15,21 @@ import { ItemModel } from '../../models/item.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel('', '', '', '', 0, '');
+  private item = new ItemModel('', '', '', '', 0, '','','');
   private locations: Array<LocationModel>;
+  private webContent: string;
+
 
   constructor(private itemService: ItemService,
     private locationService: LocationService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute) { 
+
+      this.webContent = '<br>';
+      this.webContent = this.webContent + ' 1. https://mail.google.com/mail/u/0/#inbox <br>';
+      this.webContent = this.webContent + ' 2. https://mail.google.com/mail/u/0/#inbox <br>';
+
+    }
 
   ngOnInit() {
 
