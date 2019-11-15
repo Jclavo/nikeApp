@@ -5,101 +5,101 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-<ion-grid style='width:80%;padding-left: 1cm'>
-  <form #form="ngForm" (ngSubmit)="save(form)" method="post" id="formItem">
+  <ion-grid style='width:80%;padding-left: 1cm'>
+    <form #form="ngForm" (ngSubmit)="save(form)" method="post">
 
-    <ion-card>
-      <ion-item>
-        <ion-label stacked>Name:</ion-label>
-        <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name"
-          placeholder="name" maxlength="50">
-        </ion-input>
-        <ion-icon name="person" item-start></ion-icon>
-      </ion-item>
-    </ion-card>
-
-    <ion-card>
-      <ion-item>
-        <ion-label stacked>Phone:</ion-label>
-        <ion-input position="floating" type="text" name="phone" required clearInput [(ngModel)]="item.phone"
-          placeholder="phone" maxlength="15">
-        </ion-input>
-        <ion-icon name="phone-portrait" item-start></ion-icon>
-      </ion-item>
-    </ion-card>
-
-    <ion-card>
-      <ion-item>
-        <ion-label stacked>Address:</ion-label>
-        <ion-input position="floating" type="text" name="address" required clearInput [(ngModel)]="item.address"
-          placeholder="address" maxlength="50">
-        </ion-input>
-        <ion-icon name="home" item-start></ion-icon>
-      </ion-item>
-    </ion-card>
-
-    <ion-card>
-      <ion-item>
-        <ion-label stacked>Price:</ion-label>
-        <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price"
-          placeholder="price">
-        </ion-input>
-        <ion-icon name="cash" item-start></ion-icon>
-      </ion-item>
-    </ion-card>
-
-    <ion-card>
-      <ion-item>
-        <ion-label stacked>Location:</ion-label>
-        <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)"
-          placeholder="Select a location">
-          <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
-            {{location.name}}
-          </ion-select-option>
-        </ion-select>
-        <ion-icon name="pin" item-start></ion-icon>
-      </ion-item>
-    </ion-card>
-
-
-    <ion-card>
-      <ion-item>
-        <ion-col col-5>
-          <ion-label stacked>Latitude:</ion-label>
-          <ion-input position="floating" type="text" name="latitude" required clearInput [(ngModel)]="item.latitude"
-            placeholder="latitude">
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Name:</ion-label>
+          <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name"
+            placeholder="name" maxlength="50">
           </ion-input>
-        </ion-col>
-        <ion-col col-5>
+          <ion-icon name="person" item-start></ion-icon>
+        </ion-item>
+      </ion-card>
 
-          <ion-input position="floating" type="text" name="longitude" required clearInput [(ngModel)]="item.longitude"
-            placeholder="longitude">
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Phone:</ion-label>
+          <ion-input position="floating" type="text" name="phone" required clearInput [(ngModel)]="item.phone"
+            placeholder="phone" maxlength="15">
           </ion-input>
+          <ion-icon name="phone-portrait" item-start></ion-icon>
+        </ion-item>
+      </ion-card>
+
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Address:</ion-label>
+          <ion-input position="floating" type="text" name="address" required clearInput [(ngModel)]="item.address"
+            placeholder="address" maxlength="50">
+          </ion-input>
+          <ion-icon name="home" item-start></ion-icon>
+        </ion-item>
+      </ion-card>
+
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Price:</ion-label>
+          <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price"
+            placeholder="price">
+          </ion-input>
+          <ion-icon name="cash" item-start></ion-icon>
+        </ion-item>
+      </ion-card>
+
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Location:</ion-label>
+          <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)"
+            placeholder="Select a location">
+            <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
+              {{location.name}}
+            </ion-select-option>
+          </ion-select>
+          <ion-icon name="pin" item-start></ion-icon>
+        </ion-item>
+      </ion-card>
+
+
+      <ion-card>
+        <ion-item>
+          <ion-col col-5>
+            <ion-label stacked>Latitude:</ion-label>
+            <ion-input position="floating" type="text" name="latitude" required clearInput [(ngModel)]="item.latitude"
+              placeholder="latitude">
+            </ion-input>
+          </ion-col>
+          <ion-col col-5>
+
+            <ion-input position="floating" type="text" name="longitude" required clearInput [(ngModel)]="item.longitude"
+              placeholder="longitude">
+            </ion-input>
+          </ion-col>
+          <ion-icon name="map" item-start></ion-icon>
+        </ion-item>
+      </ion-card>
+
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>WebSite:</ion-label>
+          <!-- value={{webContent}} -->
+          <ion-textarea rows="5" [(ngModel)]="websites" name="websites">
+          </ion-textarea>
+        </ion-item>
+        <ion-button style="margin-left:40%;width:8cm" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button>
+      </ion-card>
+
+      <ion-row class="ion-text-center">
+
+        <ion-col col-6>
+          <ion-button style="width:8cm" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
         </ion-col>
-        <ion-icon name="map" item-start></ion-icon>
-      </ion-item>
-    </ion-card>
+        <ion-col col-6>
+          <ion-button style="width:8cm" color="danger" routerLink="/home">Cancel</ion-button>
+        </ion-col>
+      </ion-row>
 
-    <ion-card>
-      <ion-item>
-        <ion-label stacked>WebSite:</ion-label>
-        <ion-textarea rows="5"  value={{webContent}} name="webContent" 
-        >
-        </ion-textarea>
-      </ion-item>
-      <ion-button style="margin-left:40%;width:8cm" color="warning">Add +</ion-button>
-    </ion-card>
-
-    <ion-row class="ion-text-center">
-
-      <ion-col col-6>
-        <ion-button style="width:8cm" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
-      </ion-col>
-      <ion-col col-6>
-        <ion-button style="width:8cm" color="danger" routerLink="/home">Cancel</ion-button>
-      </ion-col>
-    </ion-row>
-
-  </form>
-</ion-grid>
+    </form>
+  </ion-grid>
 </ion-content>

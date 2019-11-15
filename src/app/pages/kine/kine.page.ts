@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 import { ItemService } from 'src/app/services/firebase/item.service';
 import { LocationService } from 'src/app/services/firebase/location.service';
 
 import { LocationModel } from '../../models/location.model';
 import { ItemModel } from '../../models/item.model';
+import { CommentPage } from '../comment/comment.page';
 
 @Component({
   selector: 'app-kine',
@@ -15,21 +17,25 @@ import { ItemModel } from '../../models/item.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel('', '', '', '', 0, '','','');
-  private locations: Array<LocationModel>;
-  private webContent: string;
+  private item = new ItemModel('', '', '', '', 0, '', '', '');
+  private locations: Array<LocationModel>; 
+  private websites: string;
 
 
   constructor(private itemService: ItemService,
     private locationService: LocationService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { 
+    private activatedRoute: ActivatedRoute,
+    public modalController: ModalController) {
 
-      this.webContent = '<br>';
-      this.webContent = this.webContent + ' 1. https://mail.google.com/mail/u/0/#inbox <br>';
-      this.webContent = this.webContent + ' 2. https://mail.google.com/mail/u/0/#inbox <br>';
+    // this.websites = '<br>';
+    // this.websites = this.websites + ' 1. https://mail.google.com/mail/u/0/#inbox <br>';
+    // this.websites = this.websites + ' 2. https://mail.google.com/mail/u/0/#inbox <br>';
+    this.websites = ' 1. https://mail.google.com/mail/u/0/#inbox' + "\n" +
+                    ' 2. https://mail.google.com/mail/u/0/#inbox';
+        
 
-    }
+  }
 
   ngOnInit() {
 
@@ -97,6 +103,20 @@ export class KinePage implements OnInit {
     console.log(id)
     // this.location.latitude = latitude;
     // this.location.longuitude = longuitude;
+  }
+
+  // onClickWebsites(form: NgForm) {
+  //   console.log(form.value.websites)
+  // }
+
+  async onClickWebsites(id: string) {
+    const modal = await this.modalController.create({
+      component: CommentPage,
+      componentProps: {
+        'item_id': id
+      }
+    });
+    return await modal.present();
   }
 
 }

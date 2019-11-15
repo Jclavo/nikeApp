@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'kine', loadChildren: './pages/kine/kine.module#KinePageModule' },
   { path: 'kine/:id', loadChildren: './pages/kine/kine.module#KinePageModule' },
   { path: 'kine-list', loadChildren: './pages/kine-list/kine-list.module#KineListPageModule' },  { path: 'location', loadChildren: './pages/location/location.module#LocationPageModule' },
+  { path: 'comment', loadChildren: './pages/comment/comment.module#CommentPageModule' },
 
 
 ];
