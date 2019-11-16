@@ -37,7 +37,8 @@ export class ItemService {
             itemData.payload.doc.data().location,
             itemData.payload.doc.data().latitude,
             itemData.payload.doc.data().longitude,
-            itemData.payload.doc.data().comments
+            itemData.payload.doc.data().comments,
+            itemData.payload.doc.data().websites
           );
 
          });
@@ -57,7 +58,8 @@ export class ItemService {
           itemData.location,
           itemData.latitude,
           itemData.longitude,
-          itemData.comments
+          itemData.comments,
+          itemData.websites
         );
 
       }));
@@ -73,7 +75,8 @@ export class ItemService {
       location:item.location,
       latitude:item.latitude,
       longitude:item.longitude,
-      comments:item.comments
+      comments:item.comments,
+      websites:item.websites
     });
   }
 
@@ -95,7 +98,8 @@ export class ItemService {
       location:item.location,
       latitude:item.latitude,
       longitude:item.longitude,
-      comments:item.comments
+      comments:item.comments,
+      websites:item.websites
     });
   }
 

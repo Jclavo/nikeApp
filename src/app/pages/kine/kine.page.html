@@ -81,15 +81,23 @@
       </ion-card>
 
       <ion-card>
-
         <ion-item>
-          <ion-label stacked>WebSites> </ion-label>
-          <ion-textarea position="floating" rows="5" [(ngModel)]="websites" name="websites" readonly>
+          <ion-label stacked>Comments:</ion-label>
+          <ion-textarea position="floating" rows="5" [(ngModel)]="comments" name="comments" readonly>
           </ion-textarea>
         </ion-item>
         <!-- <ion-button style="margin-left:40%;width:8cm" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button> -->
-        <ion-button expand="full" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button>
+        <ion-button expand="full" color="warning" (click)="addComment()">Add +</ion-button>
       </ion-card>
+
+      <ion-card>
+          <ion-item>
+            <ion-label stacked>Websites:</ion-label>
+            <ion-textarea position="floating" rows="5" [(ngModel)]="websites" name="websites" readonly>
+            </ion-textarea>
+          </ion-item>
+          <ion-button expand="full" color="warning" (click)="addWebsite()">Add +</ion-button>
+        </ion-card>
 
       <ion-row class="ion-text-center">
 

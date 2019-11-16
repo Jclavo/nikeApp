@@ -13,12 +13,12 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { CommentPage } from './pages/comment/comment.page';
+import { ModalLinePage  } from './pages/modal-line/modal-line.page';
 
 
 @NgModule({
-  declarations: [AppComponent,CommentPage],
-  entryComponents: [CommentPage],
+  declarations: [AppComponent,ModalLinePage],
+  entryComponents: [ModalLinePage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebaseConfig),
             AngularFirestoreModule,FormsModule],

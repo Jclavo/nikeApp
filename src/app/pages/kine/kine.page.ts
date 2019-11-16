@@ -3,14 +3,13 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
-import { CommentPage } from '../comment/comment.page';
+import { ModalLinePage } from '../modal-line/modal-line.page';
 
 import { ItemService } from 'src/app/services/firebase/item.service';
 import { LocationService } from 'src/app/services/firebase/location.service';
 
 import { LocationModel } from '../../models/location.model';
 import { ItemModel } from '../../models/item.model';
-import { CommentModel } from '../../models/comment.model';
 
 @Component({
   selector: 'app-kine',
@@ -19,10 +18,11 @@ import { CommentModel } from '../../models/comment.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel('', '', '', '', 0, '', '', '',[]);
+  private item = new ItemModel(null, null, null, null, 0, null, null, null, [],[]);
   private locations: Array<LocationModel>;
-  private comments: Array<CommentModel>;
+  // private comments: Array<CommentModel>;
   private websites: string;
+  private comments: string;
 
 
   constructor(private itemService: ItemService,
@@ -105,43 +105,46 @@ export class KinePage implements OnInit {
 
   selectLocation(id: string) {
     console.log(id)
-    // this.location.latitude = latitude;
-    // this.location.longuitude = longuitude;
   }
 
-  // onClickWebsites(form: NgForm) {
-  //   console.log(form.value.websites)
-  // }
-
-  async onClickWebsites(id: string) {
+  async addComment() {
     const modal = await this.modalController.create({
-      component: CommentPage,
+      component: ModalLinePage,
       componentProps: {
-        'commentsInput': this.item.comments
+        'title': 'Comments',
+        'linesInput': this.item.comments
       }
     });
 
     await modal.present();
 
+    // get data 
     const { data } = await modal.onWillDismiss();
     console.log(data);
-    if(data.comments)
-    {
-      this.item.comments = data.comments;
-     
-      this.websites = this.item.comments.join("\n");
-      
-      if(this.item.id)
-      {
-        //save data into DB
-      }
+    if (data.linesOutput) {
+      this.item.comments = data.linesOutput;
+      this.comments = this.item.comments.join("\n");
     }
-    
   }
 
-  createComment()
-  {
-    
+  async addWebsite() {
+    const modal = await this.modalController.create({
+      component: ModalLinePage,
+      componentProps: {
+        'title': 'Websites',
+        'linesInput': this.item.websites
+      }
+    });
+
+    await modal.present();
+
+    // get data 
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
+    if (data.linesOutput) {
+      this.item.websites = data.linesOutput;
+      this.websites = this.item.websites.join("\n");
+    }
   }
 
 }
