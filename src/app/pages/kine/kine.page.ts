@@ -30,14 +30,6 @@ export class KinePage implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public modalController: ModalController) {
-
-    // this.websites = '<br>';
-    // this.websites = this.websites + ' 1. https://mail.google.com/mail/u/0/#inbox <br>';
-    // this.websites = this.websites + ' 2. https://mail.google.com/mail/u/0/#inbox <br>';
-    // this.websites = ' 1. https://mail.google.com/mail/u/0/#inbox' + "\n" +
-    //   ' 2. https://mail.google.com/mail/u/0/#inbox';
-
-
   }
 
   ngOnInit() {
@@ -48,7 +40,8 @@ export class KinePage implements OnInit {
       console.log('User', this.item.id);
       this.itemService.get(this.item.id).subscribe(dataItem => {
         this.item = dataItem;
-        this.websites = this.item.comments.join("\n");
+        this.comments = this.item.comments.join("\n");
+        this.websites = this.item.websites.join("\n");
       });
     }
     // else {
