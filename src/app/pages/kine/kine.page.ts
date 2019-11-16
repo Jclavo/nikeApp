@@ -3,12 +3,14 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
+import { CommentPage } from '../comment/comment.page';
+
 import { ItemService } from 'src/app/services/firebase/item.service';
 import { LocationService } from 'src/app/services/firebase/location.service';
 
 import { LocationModel } from '../../models/location.model';
 import { ItemModel } from '../../models/item.model';
-import { CommentPage } from '../comment/comment.page';
+import { CommentModel } from '../../models/comment.model';
 
 @Component({
   selector: 'app-kine',
@@ -17,8 +19,9 @@ import { CommentPage } from '../comment/comment.page';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel('', '', '', '', 0, '', '', '');
-  private locations: Array<LocationModel>; 
+  private item = new ItemModel('', '', '', '', 0, '', '', '',[]);
+  private locations: Array<LocationModel>;
+  private comments: Array<CommentModel>;
   private websites: string;
 
 
@@ -31,9 +34,9 @@ export class KinePage implements OnInit {
     // this.websites = '<br>';
     // this.websites = this.websites + ' 1. https://mail.google.com/mail/u/0/#inbox <br>';
     // this.websites = this.websites + ' 2. https://mail.google.com/mail/u/0/#inbox <br>';
-    this.websites = ' 1. https://mail.google.com/mail/u/0/#inbox' + "\n" +
-                    ' 2. https://mail.google.com/mail/u/0/#inbox';
-        
+    // this.websites = ' 1. https://mail.google.com/mail/u/0/#inbox' + "\n" +
+    //   ' 2. https://mail.google.com/mail/u/0/#inbox';
+
 
   }
 
@@ -45,6 +48,7 @@ export class KinePage implements OnInit {
       console.log('User', this.item.id);
       this.itemService.get(this.item.id).subscribe(dataItem => {
         this.item = dataItem;
+        this.websites = this.item.comments.join("\n");
       });
     }
     // else {
@@ -113,10 +117,31 @@ export class KinePage implements OnInit {
     const modal = await this.modalController.create({
       component: CommentPage,
       componentProps: {
-        'item_id': id
+        'commentsInput': this.item.comments
       }
     });
-    return await modal.present();
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
+    if(data.comments)
+    {
+      this.item.comments = data.comments;
+     
+      this.websites = this.item.comments.join("\n");
+      
+      if(this.item.id)
+      {
+        //save data into DB
+      }
+    }
+    
+  }
+
+  createComment()
+  {
+    
   }
 
 }

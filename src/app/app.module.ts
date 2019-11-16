@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
@@ -20,7 +21,7 @@ import { CommentPage } from './pages/comment/comment.page';
   entryComponents: [CommentPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebaseConfig),
-            AngularFirestoreModule],
+            AngularFirestoreModule,FormsModule],
   providers: [
     StatusBar,
     SplashScreen,

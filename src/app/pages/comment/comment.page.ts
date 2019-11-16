@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import { CommentService } from '../../services/firebase/comment.service';
+import { ModalController } from '@ionic/angular';
 
 import { CommentModel } from '../../models/comment.model';
 
@@ -12,33 +11,46 @@ import { CommentModel } from '../../models/comment.model';
 export class CommentPage implements OnInit {
 
   // Data passed in by componentProps
-  @Input() item_id: string;
+  @Input() commentsInput: Array<string>;
   //variables
-  private comments: Array<CommentModel>;
-  
-  constructor(private commentService: CommentService) { }
+  private comments: Array<CommentModel> = [];
+
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
 
-    // console.log(this.item_id);
-    this.getByItem(this.item_id);
-    this.comments = [];
+    this.commentsInput.forEach(value => console.log(this.comments.push(new CommentModel(value))));
+    console.log(this.comments);
   }
 
-  getByItem(item_id: string)
-  {
-    this.commentService.getByItem(item_id).subscribe(dataComment=> {
-      if(dataComment)
-      {
-        this.comments = dataComment;
-      }
-      
+  addLine() {
+    this.comments.push(new CommentModel(null));
+  }
+
+
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    let comments: Array<string> = [];
+
+    this.comments.filter(function (value, index, arr) {
+      // return index != i;
+      comments.push(value.comment);
+    });
+
+    console.log(comments);
+    this.modalController.dismiss({
+      'dismissed': true,
+      'comments': comments
     });
   }
 
-  addLine()
-  {
-    this.comments.push(new CommentModel('','',this.item_id));
+  // i 0 index
+  delete(i) {
+    console.log(i);
+    this.comments = this.comments.filter(function (value, index, arr) {
+      return index != i;
+    });
   }
 
 }

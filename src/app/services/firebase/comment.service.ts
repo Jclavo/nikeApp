@@ -29,9 +29,9 @@ export class CommentService {
         return this.resultObservable = this.resultRAW.map(commentData => {
 
           return new CommentModel(
-            commentData.payload.doc.id,
+            // commentData.payload.doc.id,
             commentData.payload.doc.data().comment,
-            commentData.payload.doc.data().item_id
+            // commentData.payload.doc.data().item_id
           );
 
         });
@@ -50,9 +50,9 @@ export class CommentService {
         return this.resultObservable = this.resultRAW.map(commentData => {
 
           return new CommentModel(
-            commentData.payload.doc.id,
+            // commentData.payload.doc.id,
             commentData.payload.doc.data().comment,
-            commentData.payload.doc.data().item_id
+            // commentData.payload.doc.data().item_id
           );
 
         });
@@ -64,9 +64,9 @@ export class CommentService {
       .pipe(map(commentData => {
 
         return new CommentModel(
-          id,
+          // id,
           commentData.comment,
-          commentData.item_id
+          // commentData.item_id
         );
 
       }));
@@ -78,17 +78,17 @@ export class CommentService {
 
     return this.afs.collection(this.constant.COLLECTION_NAME_COMMENTS).add({
       name: item.comment,
-      phone: item.item_id,
+      // phone: item.item_id,
     });
   }
 
-  update(item: CommentModel): Promise<void> {
+  // update(item: CommentModel): Promise<void> {
 
-    return this.afs.collection(this.constant.COLLECTION_NAME_COMMENTS).doc(item.id).set({
-      name: item.comment,
-      phone: item.item_id,
-    });
-  }
+  //   return this.afs.collection(this.constant.COLLECTION_NAME_COMMENTS).doc(item.id).set({
+  //     name: item.comment,
+  //     phone: item.item_id,
+  //   });
+  // }
 
   delete(id: string): Promise<void> {
     return this.afs.collection(this.constant.COLLECTION_NAME_COMMENTS).doc(id).delete();
