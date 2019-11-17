@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
@@ -18,7 +18,7 @@ import { ItemModel } from '../../models/item.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel(null, null, null, null, 0, null, null, null, [],[]);
+  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [],2);
   private locations: Array<LocationModel>;
   // private comments: Array<CommentModel>;
   private websites: string;
@@ -44,6 +44,7 @@ export class KinePage implements OnInit {
         this.websites = this.item.websites.join("\n");
       });
     }
+
     // else {
     //   console.log('User Empty', this.user.id);
 
@@ -55,10 +56,10 @@ export class KinePage implements OnInit {
 
   save(formItem: NgForm) {
 
-    this.item.name = formItem.value.name;
-    this.item.phone = formItem.value.phone;
-    this.item.address = formItem.value.address;
-    this.item.price = formItem.value.price;
+    // this.item.name = formItem.value.name;
+    // this.item.phone = formItem.value.phone;
+    // this.item.address = formItem.value.address;
+    // this.item.price = formItem.value.price;
 
     if (this.item.id) {
       this.itemService.update(this.item).then(() => {
@@ -138,6 +139,12 @@ export class KinePage implements OnInit {
       this.item.websites = data.linesOutput;
       this.websites = this.item.websites.join("\n");
     }
+
+  }
+
+  logRatingChange(rating) {
+    console.log("changed rating: ", rating);
+    // do your stuff
   }
 
 }

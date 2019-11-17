@@ -6,4 +6,8 @@ Firebase:
 
 https://console.firebase.google.com/project/cleivorproject/overview
 
+Rating
+npm i ionic4-star-rating
+https://www.npmjs.com/package/ionic4-star-rating
+
 

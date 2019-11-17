@@ -91,13 +91,28 @@
       </ion-card>
 
       <ion-card>
+        <ion-item>
+          <ion-label stacked>Websites:</ion-label>
+          <ion-textarea position="floating" rows="5" [(ngModel)]="websites" name="websites" readonly>
+          </ion-textarea>
+        </ion-item>
+        <ion-button expand="full" color="warning" (click)="addWebsite()">Add +</ion-button>
+      </ion-card>
+      <!-- rating="3" -->
+      <ion-card>
           <ion-item>
-            <ion-label stacked>Websites:</ion-label>
-            <ion-textarea position="floating" rows="5" [(ngModel)]="websites" name="websites" readonly>
-            </ion-textarea>
-          </ion-item>
-          <ion-button expand="full" color="warning" (click)="addWebsite()">Add +</ion-button>
-        </ion-card>
+              <ionic4-star-rating #rating [(ngModel)]="item.rating" name="rating"
+              activeIcon = "ios-star"
+              defaultIcon = "ios-star-outline"
+              activeColor = "#488aff" 
+              defaultColor = "#f4f4f4"
+              readonly="false"
+              
+              fontSize = "32px"
+              (ratingChanged)="logRatingChange($event)">
+          </ionic4-star-rating>
+            </ion-item>
+          </ion-card>
 
       <ion-row class="ion-text-center">
 
@@ -110,5 +125,7 @@
       </ion-row>
 
     </form>
+
+    
   </ion-grid>
 </ion-content>
