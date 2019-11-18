@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { ModalLinePage } from '../modal-line/modal-line.page';
+import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
+
 
 import { ItemService } from 'src/app/services/firebase/item.service';
 import { LocationService } from 'src/app/services/firebase/location.service';
@@ -18,7 +20,7 @@ import { ItemModel } from '../../models/item.model';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [],2);
+  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [],0,[]);
   private locations: Array<LocationModel>;
   // private comments: Array<CommentModel>;
   private websites: string;
@@ -139,7 +141,25 @@ export class KinePage implements OnInit {
       this.item.websites = data.linesOutput;
       this.websites = this.item.websites.join("\n");
     }
+  }
 
+  async addImage() {
+    const modal = await this.modalController.create({
+      component: ImageGalleryPage,
+      componentProps: {
+        'imagesInput': this.item.images
+      }
+    });
+
+    await modal.present();
+
+    // get data 
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
+    if (data.imagesOutput) {
+      this.item.images = data.imagesOutput;
+      //this.images = this.item.images.join("\n");
+    }
   }
 
   logRatingChange(rating) {

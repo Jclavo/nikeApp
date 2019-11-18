@@ -10,7 +10,8 @@ export class ItemModel {
     public longitude: string;
     public comments: Array<string>;
     public websites: Array<string>;
-    public rating: number
+    public rating: number;
+    public images: Array<string>;
 
     constructor(id: string,
         name: string,
@@ -22,7 +23,9 @@ export class ItemModel {
         longitude: string,
         comments: Array<string>,
         websites: Array<string>,
-        rating: number) {
+        rating: number,
+        images: Array<string>
+    ) {
 
         this.id = id;
         this.name = name;
@@ -35,6 +38,7 @@ export class ItemModel {
         this.comments = comments;
         this.websites = websites;
         this.rating = rating;
+        this.images = images;
     }
 
     // constructor()

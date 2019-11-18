@@ -20,8 +20,7 @@ export class ModalLinePage implements OnInit {
 
   ngOnInit() {
 
-    this.linesInput.forEach(value => console.log(this.lines.push(new LineModel(value))));
-    console.log(this.lines);
+    this.linesInput.forEach(value => this.lines.push(new LineModel(value)));
   }
 
   addLine() {

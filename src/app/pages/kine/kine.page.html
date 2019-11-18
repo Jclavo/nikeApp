@@ -114,8 +114,14 @@
             </ion-item>
           </ion-card>
 
-      <ion-row class="ion-text-center">
+          <ion-card>
+            <ion-item>
+              <ion-label stacked>Images:</ion-label>
+            </ion-item>
+            <ion-button expand="full" color="warning" (click)="addImage()">Add +</ion-button>
+          </ion-card>
 
+      <ion-row class="ion-text-center">
         <ion-col col-6>
           <ion-button expand="full" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
         </ion-col>
