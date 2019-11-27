@@ -8,7 +8,7 @@ form, input, optgroup, select {
     margin-right: 22px;
 }
 
-ion-select, ion-input, ion-datetime, ion-item {
+ion-select, ion-input, ion-datetime{
     border: 1px solid #ededed;
     border-radius: 5px;
     background: #fbfbfb;
@@ -18,7 +18,13 @@ ion-select, ion-input, ion-datetime, ion-item {
     width: 100%;  
 }
 
-.small {
-    font-weight: small;
-    font-size: 10px;
-  }
+ion-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+ion-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+

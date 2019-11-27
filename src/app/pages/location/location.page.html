@@ -36,7 +36,7 @@
           <ion-label position="stacked">Active:</ion-label>
           <ion-toggle [(ngModel)]="location.active" name="active"></ion-toggle>
         </ion-col>
-        
+
       </ion-row>
 
       <ion-row class="ion-text-center">
@@ -50,29 +50,33 @@
       </ion-row>
 
     </ion-grid>
-
   </form>
 
-  <ion-title>Location List</ion-title>
-  <ion-list>
-      <ion-item *ngFor="let location of locations" >
-        <ion-label>
-          {{ location.name }}
-        </ion-label>
+  <ion-item-divider color="secondary">
+    <ion-label>
+      Location List
+    </ion-label>
+  </ion-item-divider>
 
-        <ion-button routerLink="/location">
-          <ion-icon slot="icon-only" name="map"></ion-icon>
-        </ion-button>
-  
-        <ion-button title="Edit" (click)="update(location.id)">
-          <ion-icon slot="icon-only" name="create" ></ion-icon>
-        </ion-button>
-  
-        <ion-button color="danger" title="Delete" (click)="delete(location.id)">
-          <ion-icon slot="icon-only" name="trash" ></ion-icon>
-        </ion-button>
-  
-      </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let location of locations">
+      <ion-label>
+        {{ location.name }}
+      </ion-label>
+
+      <ion-button routerLink="/location">
+        <ion-icon slot="icon-only" name="map"></ion-icon>
+      </ion-button>
+
+      <ion-button title="Edit" (click)="update(location.id)">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button color="danger" title="Delete" (click)="delete(location.id)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+  </ion-list>
 
 </ion-content>
