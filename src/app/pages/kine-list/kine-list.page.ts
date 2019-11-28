@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ItemService } from 'src/app/services/firebase/item.service';
-
+//MODELS
 import { ItemModel } from '../../models/item.model';
+import { AlertController } from '@ionic/angular';
+
+//SERVICES
+import { ItemService } from 'src/app/services/firebase/item.service';
+import { AlertService } from '../../services/alert.service';
+import { ProgressIndicatorService } from '../../services/progress-indicator.service';
 
 @Component({
   selector: 'app-kine-list',
@@ -15,33 +20,71 @@ export class KineListPage implements OnInit {
   public items: Array<ItemModel>;
 
   constructor(private itemService: ItemService,
-    private router: Router) {
+    private router: Router,
+    private alertService: AlertService,
+    private alertController: AlertController,
+    private progressIndicatorService: ProgressIndicatorService) {
     this.items = [];
   }
 
   ngOnInit() {
 
+    this.getAll();
+  }
+
+  async getAll()
+  {
+    const loading = await this.progressIndicatorService.createLoading();
+    loading.present();
+    
     this.itemService.getAll().subscribe(dataItems => {
-      //this.loading = false;
-      if (dataItems) {
+      if (dataItems.length) {
         this.items = dataItems;
       }
-
-      console.log("items: ", this.items);
-    });
+      else
+      {
+        this.alertService.presentToast('Data not found .....');  
+      }
+      loading.dismiss();
+    }, error => {
+      this.alertService.presentToast('There was a problem getting.....' + error);
+      loading.dismiss();
+    })
 
   }
 
-  delete(id: string)
+  async askForDelete(id: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Do you want to <strong>DELETE</strong> it?!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.delete(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  private async delete(id: string)
   {
+    const loading = await this.progressIndicatorService.createLoading();
+    loading.present();
+
     this.itemService.delete(id).then(() => {
-      console.log('User deleted');
-      //this.showToast('Idea added');
-    }, err => {
-      //this.showToast('There was a problem adding your idea :(');
-      console.log('There was a problem deleting.....');
+      this.alertService.presentToast('User deleted');
+    }, error => {
+      this.alertService.presentToast('There was a problem deleting.....' + error);
+    }).finally(() => {
+      loading.dismiss();
     });
   }
-
-
 }
