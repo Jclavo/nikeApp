@@ -21,7 +21,9 @@ export class LocationService {
 
   getAll(): Observable<LocationModel[]> {
 
-    return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS).snapshotChanges()
+    return this.afs.collection(this.constant.COLLECTION_NAME_LOCATIONS,
+      ref => ref.orderBy("name", "asc"))
+      .snapshotChanges()
       .pipe(map(res => {
 
         this.resultRAW = res;

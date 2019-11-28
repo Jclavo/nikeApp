@@ -38,7 +38,22 @@ export class KinePage implements OnInit {
 
     this.item.id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    if (this.item.id) {
+    this.getAllActiveLocations();
+    
+    // if (this.item.id) {
+    //   console.log('User', this.item.id);
+    //   this.getById(this.item.id);
+    // }
+
+    // else {
+    //   console.log('User Empty', this.user.id);
+
+    // }
+  }
+
+  getById()
+  {
+      if (this.item.id) {
       console.log('User', this.item.id);
       this.itemService.get(this.item.id).subscribe(dataItem => {
         this.item = dataItem;
@@ -46,15 +61,8 @@ export class KinePage implements OnInit {
         this.websites = this.item.websites.join("\n");
       });
     }
-
-    // else {
-    //   console.log('User Empty', this.user.id);
-
-    // }
-
-    this.getAllActiveLocations();
-
-  }
+    }
+    
 
   save(formItem: NgForm) {
 
@@ -89,13 +97,15 @@ export class KinePage implements OnInit {
   }
 
   getAllActiveLocations() {
+    
     this.locationService.getAllActive().subscribe(dataLocations => {
       //this.loading = false;
       if (dataLocations) {
         this.locations = dataLocations;
       }
-
       console.log("locations: ", this.locations);
+
+      this.getById();
     });
   }
 

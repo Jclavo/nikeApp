@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
+//MODELS
+import { LocationModel } from '../../models/location.model';
+import { LoadingController, AlertController } from '@ionic/angular';
+
+//SERVICES
 import { LocationService } from '../../services/firebase/location.service';
 import { AlertService } from '../../services/alert.service';
 import { ProgressIndicatorService } from '../../services/progress-indicator.service';
-
-
-import { LocationModel } from '../../models/location.model';
-import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-location',
@@ -17,18 +18,21 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LocationPage implements OnInit {
 
-  private location = new LocationModel('', 'unknown', '', '', true);
+  private location = new LocationModel('', '', '', '', true);
 
   private locations: Array<LocationModel> = [];
 
   constructor(private locationService: LocationService,
     private router: Router,
     private alertService: AlertService,
-    private loadingController: LoadingController,
+    private alertController: AlertController,
     private progressIndicatorService: ProgressIndicatorService) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.getAll();
+  }
 
+  async getAll() {
     const loading = await this.progressIndicatorService.createLoading();
     loading.present();
 
@@ -38,10 +42,11 @@ export class LocationPage implements OnInit {
       }
       loading.dismiss();
     });
+
   }
 
   async save(formLocation: NgForm) {
-    
+
     const loading = await this.progressIndicatorService.createLoading();
     loading.present();
 
@@ -60,7 +65,7 @@ export class LocationPage implements OnInit {
       }).finally(() => {
         loading.dismiss();
       });
-       
+
     }
     else {
       this.locationService.create(this.location).then(() => {
@@ -76,10 +81,36 @@ export class LocationPage implements OnInit {
     this.location = new LocationModel('', 'unknown', '', '', true);
   }
 
-  async delete(id: string) {
+  async askForDelete(id: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Do you want to <strong>DELETE</strong> it?!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          // handler: (blah) => {
+          //   console.log('Confirm Cancel: blah');
+          // }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            // console.log('Confirm Okay');
+            this.delete(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  private async delete(id: string) {
+
     const loading = await this.progressIndicatorService.createLoading();
     loading.present();
-    
+
     this.locationService.delete(id).then(() => {
       this.alertService.presentToast('Location deleted');
     }, error => {
@@ -89,23 +120,10 @@ export class LocationPage implements OnInit {
     });
   }
 
-  update(id: string) {
+  private update(id: string) {
     this.locationService.get(id).subscribe(dataLocation => {
       this.location = dataLocation;
     });
   }
-
-  // async presentLoading() {
-
-  //    const loading = await this.loadingController.create({
-  //     message: 'Loading',
-  //     duration: 2000
-  //   });
-  //   await loading.present();
-
-  //   await loading.dismiss();
-
-  //   console.log('Loading dismissed!');
-  // }
 
 }

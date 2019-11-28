@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Location</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -72,7 +72,7 @@
         <ion-icon slot="icon-only" name="create"></ion-icon>
       </ion-button>
 
-      <ion-button color="danger" title="Delete" (click)="delete(location.id)">
+      <ion-button color="danger" title="Delete" (click)="askForDelete(location.id)">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
 

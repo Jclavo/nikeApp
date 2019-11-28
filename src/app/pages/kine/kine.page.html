@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary"> 
     <ion-title>Item</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -51,8 +51,7 @@
       <ion-card>
         <ion-item>
           <ion-label stacked>Location:</ion-label>
-          <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)"
-            placeholder="Select a location">
+          <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)">
             <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
               {{location.name}}
             </ion-select-option>
