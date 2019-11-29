@@ -29,23 +29,19 @@ export class ModalLinePage implements OnInit {
 
 
   dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
     let lines: Array<string> = [];
 
     this.lines.filter(function (value, index, arr) {
       lines.push(value.line);
     });
 
-    console.log(lines);
     this.modalController.dismiss({
       'linesOutput': lines
     });
   }
 
-  // i 0 index
+  // i = index
   delete(i) {
-    console.log(i);
     this.lines = this.lines.filter(function (value, index, arr) {
       return index != i;
     });

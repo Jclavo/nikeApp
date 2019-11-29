@@ -9,7 +9,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let image of images">
 
-      <ion-item>
+      <ion-item class="ion-text-center">
         <img name="image" [src]="image.fullPath">
       </ion-item>
 
@@ -36,6 +36,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="full" color="success" (click)="dismiss()">Back</ion-button>
+    <ion-button expand="full" color="success" (click)="dismiss()">Done</ion-button>
   </ion-toolbar>
 </ion-footer>

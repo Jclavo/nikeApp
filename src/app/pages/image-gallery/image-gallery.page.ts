@@ -1,9 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+//MODELS
+import { ImageModel } from '../../models/image.model';
+
+//SERVICES
 import { ImageService } from '../../services/image.service';
 import { ConstantService } from '../../services/constant.service';
-import { ImageModel } from '../../models/image.model';
+import { AlertService } from '../../services/alert.service';
+import { ProgressIndicatorService } from '../../services/progress-indicator.service';
 
 @Component({
   selector: 'app-image-gallery',
@@ -19,7 +24,9 @@ export class ImageGalleryPage implements OnInit {
 
   constructor(private imageService: ImageService,
     private constantService: ConstantService,
-    public modalController: ModalController) { }
+    public modalController: ModalController,
+    private alertService: AlertService,
+    private progressIndicatorService: ProgressIndicatorService) { }
 
   ngOnInit() {
 
@@ -41,11 +48,8 @@ export class ImageGalleryPage implements OnInit {
 
         let base64 = r.target.result as string;
 
-        //this.images.push(new ImageModel(base64,imageFile));
-
       };
 
-      //console.log('imagem: ', element.files[0]);
       reader.readAsDataURL(element.files[0]);
       imageFile = element.files[0];
 
@@ -57,12 +61,15 @@ export class ImageGalleryPage implements OnInit {
 
 
   selectPicture() {
-    console.log('oliii');
     const element = this.cameraInput.nativeElement as HTMLInputElement;
     element.click();
   }
 
-  save(image: ImageModel) {
+  async save(image: ImageModel) {
+
+    const loading = await this.progressIndicatorService.createLoading();
+    loading.present();
+
     // it can be send like an object from a class
     const formImage = new FormData();
     formImage.append('image', image.image, image.image.name);
@@ -72,11 +79,13 @@ export class ImageGalleryPage implements OnInit {
       dataImage.fullPath = this.constantService.PATH_IMAGES + dataImage.name;
 
       console.log('image', dataImage.name);
-
       this.images.push(dataImage);
-    },
-      error => { console.log('Received an error') }
-    );
+      loading.dismiss();
+    }, error => {
+      this.alertService.presentToast('There was a problem updating.....' + error);
+      loading.dismiss();
+    }
+    )
   }
   delete(id: string, name: string) {
     //this.imageStoreService.delete(id,name);

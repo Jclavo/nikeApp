@@ -86,7 +86,7 @@
           </ion-textarea>
         </ion-item>
         <!-- <ion-button style="margin-left:40%;width:8cm" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button> -->
-        <ion-button expand="full" color="warning" (click)="addComment()">Add +</ion-button>
+        <ion-button expand="full" color="primary" (click)="addComment()">Add +</ion-button>
       </ion-card>
 
       <ion-card>
@@ -95,7 +95,7 @@
           <ion-textarea position="floating" rows="5" [(ngModel)]="websites" name="websites" readonly>
           </ion-textarea>
         </ion-item>
-        <ion-button expand="full" color="warning" (click)="addWebsite()">Add +</ion-button>
+        <ion-button expand="full" color="primary" (click)="addWebsite()">Add +</ion-button>
       </ion-card>
       <!-- rating="3" -->
       <ion-card>
@@ -117,15 +117,15 @@
             <ion-item>
               <ion-label stacked>Images:</ion-label>
             </ion-item>
-            <ion-button expand="full" color="warning" (click)="addImage()">Add +</ion-button>
+            <ion-button expand="full" color="primary" (click)="addImage()">Add +</ion-button>
           </ion-card>
 
       <ion-row class="ion-text-center">
         <ion-col col-6>
-          <ion-button expand="full" [disabled]="!form.valid" type="submit" color="success">Save</ion-button>
+          <ion-button expand="full" type="submit" color="success">Save</ion-button>
         </ion-col>
         <ion-col col-6>
-          <ion-button expand="full" color="danger" routerLink="/home">Cancel</ion-button>
+          <ion-button expand="full" color="danger" routerLink="/kine-list">Cancel</ion-button>
         </ion-col>
       </ion-row>
 
