@@ -17,6 +17,9 @@ import { HttpClientModule} from '@angular/common/http';
 import { ModalLinePage  } from './pages/modal-line/modal-line.page';
 import { ImageGalleryPage } from './pages/image-gallery/image-gallery.page';
 
+//Helpers
+import { Validation } from './helpers/validations';
+
 @NgModule({
   declarations: [AppComponent,ModalLinePage, ImageGalleryPage],
   entryComponents: [ModalLinePage, ImageGalleryPage],
@@ -26,7 +29,8 @@ import { ImageGalleryPage } from './pages/image-gallery/image-gallery.page';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Validation
   ],
   bootstrap: [AppComponent]
 })

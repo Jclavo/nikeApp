@@ -16,6 +16,9 @@ import { ProgressIndicatorService } from '../../services/progress-indicator.serv
 import { LocationModel } from '../../models/location.model';
 import { ItemModel } from '../../models/item.model';
 
+//Helpers
+import { Validation } from '../../helpers/validations';
+
 @Component({
   selector: 'app-kine',
   templateUrl: './kine.page.html',
@@ -37,7 +40,8 @@ export class KinePage implements OnInit {
     private modalController: ModalController,
     private alertService: AlertService,
     private alertController: AlertController,
-    private progressIndicatorService: ProgressIndicatorService) {
+    private progressIndicatorService: ProgressIndicatorService,
+    private validation: Validation) {
   }
 
   ngOnInit() {
@@ -69,6 +73,16 @@ export class KinePage implements OnInit {
 
 
   async save(formItem: NgForm) {
+
+    //Validations
+    if(   this.validation.isEmptyString(this.item.name)
+        || this.validation.isEmptyString(this.item.phone) 
+        || this.validation.isEmptyString(this.item.location) 
+    )
+    {
+      this.alertService.presentToast('Data is required');
+      return;
+    }
 
     const loading = await this.progressIndicatorService.createLoading();
     loading.present();
