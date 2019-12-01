@@ -31,8 +31,10 @@
       <ion-card>
         <ion-item>
           <ion-label stacked>Phone:</ion-label>
-          <ion-input position="floating" type="text" name="phone" required clearInput [(ngModel)]="item.phone"
-            placeholder="phone" maxlength="15">
+          <ion-input position="floating" type="phone" name="phone" required clearInput [(ngModel)]="item.phone"
+            placeholder="phone" maxlength="15" >
+            
+            <!-- [pattern]="[0-9]"> -->
           </ion-input>
           <ion-icon name="phone-portrait" item-start></ion-icon>
         </ion-item>
