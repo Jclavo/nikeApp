@@ -32,7 +32,7 @@ export class ItemService {
 
         return this.resultObservable = this.resultRAW.map(itemData => {
 
-          return new ItemModel(
+          return this.createItem(
             itemData.payload.doc.id,
             itemData.payload.doc.data().name,
             itemData.payload.doc.data().phone,
@@ -56,23 +56,6 @@ export class ItemService {
   get(id: string): Observable<ItemModel> {
     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc<ItemModel>(id).valueChanges()
       .pipe(map(itemData => {
-
-        // return new ItemModel(
-        //   id,
-        //   itemData.name,
-        //   itemData.phone,
-        //   itemData.address,
-        //   itemData.price,
-        //   itemData.location,
-        //   itemData.latitude,
-        //   itemData.longitude,
-        //   itemData.comments,
-        //   itemData.websites,
-        //   itemData.socialNetworks,
-        //   itemData.rating,
-        //   itemData.images,
-        //   itemData.test
-        // );
 
         return this.createItem(
           id,
@@ -162,8 +145,18 @@ export class ItemService {
 
     //Validations
     id = this.validation.parseToString(id);
-
+    name = this.validation.parseToString(name);
+    phone = this.validation.parseToString(phone);
+    address = this.validation.parseToString(address);
+    price = this.validation.isEmptyString(price.toString()) ? 0 : price;
+    location = this.validation.parseToString(location);
+    latitude = this.validation.parseToString(latitude);
+    longitude = this.validation.parseToString(longitude);
+    comments = this.validation.parseToArray(comments);
+    websites = this.validation.parseToArray(websites);
     socialNetworks = this.validation.parseToArray(socialNetworks);
+    rating = this.validation.isEmptyString(rating.toString()) ? 0 : rating;
+    images = this.validation.parseToArray(images);
 
     // Do not do it at home
     //test = this.validation.isEmptyString(<string><unknown>test)? false : true;
