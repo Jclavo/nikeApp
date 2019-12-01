@@ -66,8 +66,9 @@ export class KinePage implements OnInit {
     if (this.item.id) {
       this.itemService.get(this.item.id).subscribe(dataItem => {
         this.item = dataItem;
-        this.comments = this.item.comments.join("\n");
-        this.websites = this.item.websites.join("\n");
+        this.comments = this.validation.isEmptyArray(this.item.comments) ? "" : this.item.comments.join("\n");
+        this.websites = this.validation.isEmptyArray(this.item.websites) ? "" : this.item.websites.join("\n");
+        this.socialNetworks = this.validation.isEmptyArray(this.item.socialNetworks) ? "" : this.item.socialNetworks.join("\n");
       });
     }
   }
