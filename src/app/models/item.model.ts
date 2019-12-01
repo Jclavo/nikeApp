@@ -13,6 +13,7 @@ export class ItemModel {
     public socialNetworks: Array<string>;
     public rating: number;
     public images: Array<string>;
+    public test: boolean;
 
     constructor(id: string,
         name: string,
@@ -26,7 +27,8 @@ export class ItemModel {
         websites: Array<string>,
         socialNetworks: Array<string>,
         rating: number,
-        images: Array<string>
+        images: Array<string>,
+        test: boolean
     ) {
 
         this.id = id;
@@ -42,12 +44,36 @@ export class ItemModel {
         this.socialNetworks = socialNetworks;
         this.rating = rating;
         this.images = images;
+        this.test = test;
     }
 
-    // constructor()
-    // {
+    private isEmptyString(value: string)
+    {
+        //undefined
+        if(value === undefined) return true;
 
-    // }
+        //null
+        if(value === null) return true;
 
+        // delete blank spaces
+        value = value.trim();
+        // empty
+        if(value.length === 0) return true;
 
+        return false;
+    }
+
+    private isEmptyArray(value: Array<any>)
+    {
+        //undefined
+        if(value === undefined) return true;
+
+        //null
+        if(value === null) return true;
+
+        // empty
+        if(value.length === 0) return true;
+
+        return false;
+    }
 }

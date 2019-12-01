@@ -41,7 +41,8 @@ export class ItemService {
             itemData.payload.doc.data().websites,
             itemData.payload.doc.data().socialNetworks,
             itemData.payload.doc.data().rating,
-            itemData.payload.doc.data().images
+            itemData.payload.doc.data().images,
+            itemData.payload.doc.data().test
           );
 
          });
@@ -65,7 +66,8 @@ export class ItemService {
           itemData.websites,
           itemData.socialNetworks,
           itemData.rating,
-          itemData.images
+          itemData.images,
+          itemData.test
         );
 
       }));
@@ -85,7 +87,8 @@ export class ItemService {
       websites:item.websites,
       socialNetworks:item.socialNetworks,
       rating:item.rating,
-      images:item.images
+      images:item.images,
+      test:item.test
     });
   }
 
@@ -111,7 +114,8 @@ export class ItemService {
       websites:item.websites,
       socialNetworks:item.socialNetworks,
       rating:item.rating,
-      images:item.images
+      images:item.images,
+      test:item.test
     });
   }
 

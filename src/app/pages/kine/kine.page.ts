@@ -26,7 +26,7 @@ import { Validation } from '../../helpers/validations';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [], [], 0, []);
+  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [], [], 0, [], false);
   private locations: Array<LocationModel>;
   // private comments: Array<CommentModel>;
   private websites: string;
