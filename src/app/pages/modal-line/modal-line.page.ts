@@ -24,8 +24,8 @@ export class ModalLinePage implements OnInit {
 
   ngOnInit() {
 
-    //if(this.validation.isEmptyString(this.linesInput)) 
-    if(this.linesInput.length > 0) this.linesInput.forEach(value => this.lines.push(new LineModel(value)));
+    if(!this.validation.isEmptyArray(this.linesInput)) this.linesInput.forEach(value => this.lines.push(new LineModel(value)));
+    //if(this.linesInput.length > 0) this.linesInput.forEach(value => this.lines.push(new LineModel(value)));
 
   }
 
