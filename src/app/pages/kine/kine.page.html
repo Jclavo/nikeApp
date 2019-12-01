@@ -120,14 +120,14 @@
       
       <ion-card>
           <ion-item>
-              <!-- rating="3" -->
-              <ionic4-star-rating #rating [(ngModel)]="item.rating" name="rating"
+              <!-- [(ngModel)]="item.rating" -->
+              <ionic4-star-rating #rating name="rating"
               activeIcon = "ios-star"
               defaultIcon = "ios-star-outline"
               activeColor = "#488aff" 
               defaultColor = "#f4f4f4"
               readonly="false"
-              
+              rating={{item.rating}}
               fontSize = "32px"
               (ratingChanged)="logRatingChange($event)">
           </ionic4-star-rating>
