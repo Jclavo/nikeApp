@@ -13,6 +13,19 @@ export class Validation {
         // empty
         if(value.length === 0) return true;
 
+        return false;
+    }
+
+    isEmptyArray(value: Array<any>)
+    {
+        //undefined
+        if(value === undefined) return true;
+
+        //null
+        if(value === null) return true;
+
+        // empty
+        if(value.length === 0) return true;
 
         return false;
     }
