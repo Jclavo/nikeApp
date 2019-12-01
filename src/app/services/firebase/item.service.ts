@@ -161,7 +161,9 @@ export class ItemService {
   ) {
 
     //Validations
-    socialNetworks = this.validation.isEmptyArray(socialNetworks) ? [] : socialNetworks;
+    id = this.validation.parseToString(id);
+
+    socialNetworks = this.validation.parseToArray(socialNetworks);
 
     // Do not do it at home
     //test = this.validation.isEmptyString(<string><unknown>test)? false : true;

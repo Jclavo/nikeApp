@@ -32,6 +32,18 @@ export class Validation {
 
     isBoolean(value: boolean) {
         if( value === true) return true;
-        else return false;
+        return false;
+     }
+
+     parseToString(value: string): string
+     {
+        if ( this.isEmptyString(value) ) return "";
+        return value;
+     }
+
+     parseToArray(value: Array<any>): Array<any>
+     {
+        if ( this.isEmptyArray(value) ) return [];
+        return value;
      }
 }
