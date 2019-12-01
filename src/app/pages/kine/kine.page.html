@@ -8,6 +8,16 @@
   <!-- <ion-grid style='width:80%;padding-left: 1cm'> -->
     <form #form="ngForm" (ngSubmit)="save(form)" method="post"> 
 
+        <ion-card>
+            <ion-item>
+              <ion-label stacked>ID:</ion-label>
+              <ion-input position="floating" type="text" name="id" required clearInput [(ngModel)]="item.id"
+              readonly>
+              </ion-input>
+              <ion-icon name="person" item-start></ion-icon>
+            </ion-item>
+          </ion-card>
+      
       <ion-card>
         <ion-item>
           <ion-label stacked>Name:</ion-label>
