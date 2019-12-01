@@ -97,9 +97,20 @@
         </ion-item>
         <ion-button expand="full" color="primary" (click)="addWebsite()">Add +</ion-button>
       </ion-card>
-      <!-- rating="3" -->
+
       <ion-card>
           <ion-item>
+            <ion-label stacked>Social Networks:</ion-label>
+            <ion-textarea position="floating" rows="5" [(ngModel)]="socialNetworks" name="socialNetworks" readonly>
+            </ion-textarea>
+          </ion-item>
+          <ion-button expand="full" color="primary" (click)="addSocialNetworks()">Add +</ion-button>
+        </ion-card>
+
+      
+      <ion-card>
+          <ion-item>
+              <!-- rating="3" -->
               <ionic4-star-rating #rating [(ngModel)]="item.rating" name="rating"
               activeIcon = "ios-star"
               defaultIcon = "ios-star-outline"

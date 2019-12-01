@@ -10,6 +10,7 @@ export class ItemModel {
     public longitude: string;
     public comments: Array<string>;
     public websites: Array<string>;
+    public socialNetworks: Array<string>;
     public rating: number;
     public images: Array<string>;
 
@@ -23,6 +24,7 @@ export class ItemModel {
         longitude: string,
         comments: Array<string>,
         websites: Array<string>,
+        socialNetworks: Array<string>,
         rating: number,
         images: Array<string>
     ) {
@@ -37,6 +39,7 @@ export class ItemModel {
         this.longitude = longitude;
         this.comments = comments;
         this.websites = websites;
+        this.socialNetworks = socialNetworks;
         this.rating = rating;
         this.images = images;
     }

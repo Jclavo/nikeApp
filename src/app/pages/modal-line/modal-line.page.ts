@@ -4,6 +4,9 @@ import { ModalController } from '@ionic/angular';
 
 import { LineModel } from '../../models/line.model';
 
+//Helpers
+import { Validation } from '../../helpers/validations';
+
 @Component({
   selector: 'app-modal-line',
   templateUrl: './modal-line.page.html',
@@ -12,15 +15,18 @@ import { LineModel } from '../../models/line.model';
 export class ModalLinePage implements OnInit {
 
   @Input() title: string;
-  @Input() linesInput: Array<string>;
+  @Input() linesInput: Array<string> = [];
   //variables
   private lines: Array<LineModel> = [];
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController,
+    private validation: Validation) { }
 
   ngOnInit() {
 
-    this.linesInput.forEach(value => this.lines.push(new LineModel(value)));
+    //if(this.validation.isEmptyString(this.linesInput)) 
+    if(this.linesInput.length > 0) this.linesInput.forEach(value => this.lines.push(new LineModel(value)));
+
   }
 
   addLine() {

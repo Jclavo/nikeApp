@@ -26,11 +26,12 @@ import { Validation } from '../../helpers/validations';
 })
 export class KinePage implements OnInit {
 
-  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [], 0, []);
+  private item = new ItemModel(null, null, null, null, 0, null, null, null, [], [], [], 0, []);
   private locations: Array<LocationModel>;
   // private comments: Array<CommentModel>;
   private websites: string;
   private comments: string;
+  private socialNetworks: string;
 
 
   constructor(private itemService: ItemService,
@@ -163,6 +164,26 @@ export class KinePage implements OnInit {
     if (data.linesOutput) {
       this.item.websites = data.linesOutput;
       this.websites = this.item.websites.join("\n");
+    }
+  }
+
+  async addSocialNetworks() {
+    const modal = await this.modalController.create({
+      component: ModalLinePage,
+      componentProps: {
+        'title': 'SocialNetworks',
+        'linesInput': this.item.socialNetworks
+      }
+    });
+
+    await modal.present();
+
+    // get data 
+    const { data } = await modal.onWillDismiss();
+    if(data === undefined) return;
+    if (data.linesOutput) {
+      this.item.socialNetworks = data.linesOutput;
+      this.socialNetworks = this.item.socialNetworks.join("\n");
     }
   }
 

@@ -39,6 +39,7 @@ export class ItemService {
             itemData.payload.doc.data().longitude,
             itemData.payload.doc.data().comments,
             itemData.payload.doc.data().websites,
+            itemData.payload.doc.data().socialNetworks,
             itemData.payload.doc.data().rating,
             itemData.payload.doc.data().images
           );
@@ -62,6 +63,7 @@ export class ItemService {
           itemData.longitude,
           itemData.comments,
           itemData.websites,
+          itemData.socialNetworks,
           itemData.rating,
           itemData.images
         );
@@ -81,6 +83,7 @@ export class ItemService {
       longitude:item.longitude,
       comments:item.comments,
       websites:item.websites,
+      socialNetworks:item.socialNetworks,
       rating:item.rating,
       images:item.images
     });
@@ -106,6 +109,7 @@ export class ItemService {
       longitude:item.longitude,
       comments:item.comments,
       websites:item.websites,
+      socialNetworks:item.socialNetworks,
       rating:item.rating,
       images:item.images
     });
