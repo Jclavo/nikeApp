@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { ItemModel } from '../../models/item.model';
 import { ConstantService } from '../constant.service';
 
+//Helpers
+import { Validation } from '../../helpers/validations';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +20,8 @@ export class ItemService {
   //private 
 
   constructor(private afs: AngularFirestore,
-    private constant: ConstantService) { }
+    private constant: ConstantService,
+    private validation: Validation) { }
 
   getAll(): Observable<ItemModel[]> {
 
@@ -27,7 +31,7 @@ export class ItemService {
         this.resultRAW = res;
 
         return this.resultObservable = this.resultRAW.map(itemData => {
-          
+
           return new ItemModel(
             itemData.payload.doc.id,
             itemData.payload.doc.data().name,
@@ -45,15 +49,32 @@ export class ItemService {
             itemData.payload.doc.data().test
           );
 
-         });
+        });
       }));
   }
 
   get(id: string): Observable<ItemModel> {
     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc<ItemModel>(id).valueChanges()
       .pipe(map(itemData => {
-        
-        return new ItemModel(
+
+        // return new ItemModel(
+        //   id,
+        //   itemData.name,
+        //   itemData.phone,
+        //   itemData.address,
+        //   itemData.price,
+        //   itemData.location,
+        //   itemData.latitude,
+        //   itemData.longitude,
+        //   itemData.comments,
+        //   itemData.websites,
+        //   itemData.socialNetworks,
+        //   itemData.rating,
+        //   itemData.images,
+        //   itemData.test
+        // );
+
+        return this.createItem(
           id,
           itemData.name,
           itemData.phone,
@@ -68,7 +89,7 @@ export class ItemService {
           itemData.rating,
           itemData.images,
           itemData.test
-        );
+          )
 
       }));
   }
@@ -76,19 +97,19 @@ export class ItemService {
   create(item: ItemModel): Promise<DocumentReference> {
 
     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).add({
-      name:item.name,
-      phone:item.phone,
-      address:item.address,
-      price:item.price,
-      location:item.location,
-      latitude:item.latitude,
-      longitude:item.longitude,
-      comments:item.comments,
-      websites:item.websites,
-      socialNetworks:item.socialNetworks,
-      rating:item.rating,
-      images:item.images,
-      test:item.test
+      name: item.name,
+      phone: item.phone,
+      address: item.address,
+      price: item.price,
+      location: item.location,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      comments: item.comments,
+      websites: item.websites,
+      socialNetworks: item.socialNetworks,
+      rating: item.rating,
+      images: item.images,
+      test: item.test
     });
   }
 
@@ -104,23 +125,65 @@ export class ItemService {
 
     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc(item.id).set({
       name: item.name,
-      phone:item.phone,
-      address:item.address,
-      price:item.price,
-      location:item.location,
-      latitude:item.latitude,
-      longitude:item.longitude,
-      comments:item.comments,
-      websites:item.websites,
-      socialNetworks:item.socialNetworks,
-      rating:item.rating,
-      images:item.images,
-      test:item.test
+      phone: item.phone,
+      address: item.address,
+      price: item.price,
+      location: item.location,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      comments: item.comments,
+      websites: item.websites,
+      socialNetworks: item.socialNetworks,
+      rating: item.rating,
+      images: item.images,
+      test: item.test
     });
   }
 
-  delete(id: string): Promise<void>
-  {
+  delete(id: string): Promise<void> {
     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc(id).delete();
   }
+
+  private createItem(id: string,
+    name: string,
+    phone: string,
+    address: string,
+    price: number,
+    location: string,
+    latitude: string,
+    longitude: string,
+    comments: Array<string>,
+    websites: Array<string>,
+    socialNetworks: Array<string>,
+    rating: number,
+    images: Array<string>,
+    test: boolean
+  ) {
+
+    //Validations
+    socialNetworks = this.validation.isEmptyArray(socialNetworks) ? [] : socialNetworks;
+
+    // Do not do it at home
+    //test = this.validation.isEmptyString(<string><unknown>test)? false : true;
+    test = this.validation.isBoolean(test);
+
+    return new ItemModel(
+      id,
+      name,
+      phone,
+      address,
+      price,
+      location,
+      latitude,
+      longitude,
+      comments,
+      websites,
+      socialNetworks,
+      rating,
+      images,
+      test
+    );
+  }
+
+
 }

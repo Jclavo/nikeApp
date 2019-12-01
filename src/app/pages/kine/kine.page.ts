@@ -66,6 +66,7 @@ export class KinePage implements OnInit {
   getById() {
     if (this.item.id) {
       this.itemService.get(this.item.id).subscribe(dataItem => {
+        console.log('Kine ', dataItem);
         this.item = dataItem;
         this.comments = this.validation.isEmptyArray(this.item.comments) ? "" : this.item.comments.join("\n");
         this.websites = this.validation.isEmptyArray(this.item.websites) ? "" : this.item.websites.join("\n");

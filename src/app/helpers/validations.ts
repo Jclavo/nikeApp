@@ -29,4 +29,9 @@ export class Validation {
 
         return false;
     }
+
+    isBoolean(value: boolean) {
+        if( value === true) return true;
+        else return false;
+     }
 }
