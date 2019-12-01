@@ -32,6 +32,7 @@ export class KinePage implements OnInit {
   private websites: string;
   private comments: string;
   private socialNetworks: string;
+  private imagesNumber: number = 0;
 
 
   constructor(private itemService: ItemService,
@@ -69,6 +70,7 @@ export class KinePage implements OnInit {
         this.comments = this.validation.isEmptyArray(this.item.comments) ? "" : this.item.comments.join("\n");
         this.websites = this.validation.isEmptyArray(this.item.websites) ? "" : this.item.websites.join("\n");
         this.socialNetworks = this.validation.isEmptyArray(this.item.socialNetworks) ? "" : this.item.socialNetworks.join("\n");
+        this.imagesNumber = this.validation.isEmptyArray(this.item.images) ? 0 : this.item.images.length;
       });
     }
   }
