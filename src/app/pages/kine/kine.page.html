@@ -92,7 +92,7 @@
       <ion-card>
         <ion-item>
           <ion-label stacked>Comments:</ion-label>
-          <ion-textarea position="floating" rows="5" [(ngModel)]="comments" name="comments" readonly>
+          <ion-textarea position="floating" rows="0" [(ngModel)]="comments" name="comments" autoGrow="true" readonly>
           </ion-textarea>
         </ion-item>
         <!-- <ion-button style="margin-left:40%;width:8cm" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button> -->
@@ -102,7 +102,7 @@
       <ion-card>
         <ion-item>
           <ion-label stacked>Websites:</ion-label>
-          <ion-textarea position="floating" rows="5" [(ngModel)]="websites" name="websites" readonly>
+          <ion-textarea position="floating" rows="0" [(ngModel)]="websites" name="websites" autoGrow="true" readonly>
           </ion-textarea>
         </ion-item>
         <ion-button expand="full" color="primary" (click)="addWebsite()">Add +</ion-button>
@@ -111,7 +111,7 @@
       <ion-card>
           <ion-item>
             <ion-label stacked>Social Networks:</ion-label>
-            <ion-textarea position="floating" rows="5" [(ngModel)]="socialNetworks" name="socialNetworks" readonly>
+            <ion-textarea position="floating" rows="0" [(ngModel)]="socialNetworks" name="socialNetworks" autoGrow="true" readonly>
             </ion-textarea>
           </ion-item>
           <ion-button expand="full" color="primary" (click)="addSocialNetworks()">Add +</ion-button>
