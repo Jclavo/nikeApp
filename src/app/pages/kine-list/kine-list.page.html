@@ -14,9 +14,43 @@
 
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <ion-label>
-        {{ item.name }}
-      </ion-label>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+              Name : 
+            <ion-label>
+              {{ item.name }}
+            </ion-label>
+          </ion-col>
+          <ion-col>
+              Phome : 
+            <ion-label>
+             {{ item.phone }}
+            </ion-label>
+          </ion-col>
+          <ion-col>
+              Location : 
+            <ion-label>
+              {{ item.location }}
+            </ion-label>
+          </ion-col>
+          <ion-col>
+              rating : 
+            <ion-label>
+             {{ item.rating }}
+            </ion-label>
+          </ion-col>
+          <ion-col >
+              images : {{ item.images.length }}
+              <ion-thumbnail *ngIf="item.images.length">
+                  <img src="{{constantService.PATH_IMAGES + item.images[0] }}">
+                </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
 
       <ion-button title="Edit" [routerLink]="['/kine', item.id]">
         <ion-icon slot="icon-only" name="create"></ion-icon>

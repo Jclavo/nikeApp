@@ -9,6 +9,7 @@ import { AlertController } from '@ionic/angular';
 import { ItemService } from 'src/app/services/firebase/item.service';
 import { AlertService } from '../../services/alert.service';
 import { ProgressIndicatorService } from '../../services/progress-indicator.service';
+import { ConstantService } from '../../services/constant.service';
 
 @Component({
   selector: 'app-kine-list',
@@ -23,7 +24,8 @@ export class KineListPage implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private alertController: AlertController,
-    private progressIndicatorService: ProgressIndicatorService) {
+    private progressIndicatorService: ProgressIndicatorService,
+    private constantService: ConstantService) {
     this.items = [];
   }
 
@@ -40,6 +42,7 @@ export class KineListPage implements OnInit {
     this.itemService.getAll().subscribe(dataItems => {
       if (dataItems.length) {
         this.items = dataItems;
+        console.log('Items ',dataItems);
       }
       else
       {
