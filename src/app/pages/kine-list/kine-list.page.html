@@ -24,7 +24,7 @@
             </ion-label>
           </ion-col>
           <ion-col>
-              Phome : 
+              Phone : 
             <ion-label>
              {{ item.phone }}
             </ion-label>
@@ -36,13 +36,19 @@
             </ion-label>
           </ion-col>
           <ion-col>
-              rating : 
+            Price : 
+          <ion-label>
+            {{ item.price }}
+          </ion-label>
+        </ion-col>
+          <ion-col>
+              Rating : 
             <ion-label>
              {{ item.rating }}
             </ion-label>
           </ion-col>
           <ion-col >
-              images : {{ item.images.length }}
+              Pictures : {{ item.images.length }}
               <ion-thumbnail *ngIf="item.images.length">
                   <img src="{{constantService.PATH_IMAGES + item.images[0] }}">
                 </ion-thumbnail>

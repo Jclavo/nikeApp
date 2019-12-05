@@ -46,5 +46,18 @@ export class ItemModel {
         this.images = images;
         this.test = test;
     }
+}
 
+export class ItemListModel {
+
+    public id?: string;
+    public name: string;
+    public phone: string;
+    public address: string;
+    public price: number;
+    public location: string;
+    public rating: number;
+    public images: Array<string>;
+    public test: boolean;
+    
 }
