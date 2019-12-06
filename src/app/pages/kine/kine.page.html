@@ -1,164 +1,158 @@
 <ion-header>
-  <ion-toolbar color="primary"> 
+  <ion-toolbar color="primary">
     <ion-title>Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <!-- <ion-grid style='width:80%;padding-left: 1cm'> -->
-    <form #form="ngForm" (ngSubmit)="save(form)" method="post"> 
+  <form #form="ngForm" (ngSubmit)="save(form)" method="post">
 
-        <ion-card>
-            <ion-item>
-              <ion-label stacked>ID:</ion-label>
-              <ion-input position="floating" type="text" name="id" required clearInput [(ngModel)]="item.id"
-              readonly>
-              </ion-input>
-              <ion-icon name="person" item-start></ion-icon>
-            </ion-item>
-          </ion-card>
-      
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Name:</ion-label>
-          <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name"
-            placeholder="name" maxlength="50">
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>ID:</ion-label>
+        <ion-input position="floating" type="text" name="id" required clearInput [(ngModel)]="item.id" readonly>
+        </ion-input>
+        <ion-icon name="person" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Name:</ion-label>
+        <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name"
+          placeholder="name" maxlength="50">
+        </ion-input>
+        <ion-icon name="person" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Phone:</ion-label>
+        <ion-input position="floating" type="phone" name="phone" required clearInput [(ngModel)]="item.phone"
+          placeholder="phone" maxlength="15">
+
+          <!-- [pattern]="[0-9]"> -->
+        </ion-input>
+        <ion-icon name="phone-portrait" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Address:</ion-label>
+        <ion-input position="floating" type="text" name="address" required clearInput [(ngModel)]="item.address"
+          placeholder="address" maxlength="50">
+        </ion-input>
+        <ion-icon name="home" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Price:</ion-label>
+        <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price"
+          placeholder="price">
+        </ion-input>
+        <ion-icon name="cash" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Location:</ion-label>
+        <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)">
+          <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
+            {{location.name}}
+          </ion-select-option>
+        </ion-select>
+        <ion-icon name="pin" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-item>
+        <ion-col col-5>
+          <ion-label stacked>Latitude:</ion-label>
+          <ion-input position="floating" type="text" name="latitude" required clearInput [(ngModel)]="item.latitude"
+            placeholder="latitude">
           </ion-input>
-          <ion-icon name="person" item-start></ion-icon>
-        </ion-item>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Phone:</ion-label>
-          <ion-input position="floating" type="phone" name="phone" required clearInput [(ngModel)]="item.phone"
-            placeholder="phone" maxlength="15" >
-            
-            <!-- [pattern]="[0-9]"> -->
-          </ion-input>
-          <ion-icon name="phone-portrait" item-start></ion-icon>
-        </ion-item>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Address:</ion-label>
-          <ion-input position="floating" type="text" name="address" required clearInput [(ngModel)]="item.address"
-            placeholder="address" maxlength="50">
-          </ion-input>
-          <ion-icon name="home" item-start></ion-icon>
-        </ion-item>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Price:</ion-label>
-          <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price"
-            placeholder="price">
-          </ion-input>
-          <ion-icon name="cash" item-start></ion-icon>
-        </ion-item>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Location:</ion-label>
-          <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)">
-            <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
-              {{location.name}}
-            </ion-select-option>
-          </ion-select>
-          <ion-icon name="pin" item-start></ion-icon>
-        </ion-item>
-      </ion-card>
-
-
-      <ion-card>
-        <ion-item>
-          <ion-col col-5>
-            <ion-label stacked>Latitude:</ion-label>
-            <ion-input position="floating" type="text" name="latitude" required clearInput [(ngModel)]="item.latitude"
-              placeholder="latitude">
-            </ion-input>
-          </ion-col>
-          <ion-col col-5>
-            <ion-label stacked>Longitude:</ion-label>
-            <ion-input position="floating" type="text" name="longitude" required clearInput [(ngModel)]="item.longitude"
-              placeholder="longitude">
-            </ion-input>
-          </ion-col>
-          <ion-icon name="map" item-start></ion-icon>
-        </ion-item>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Comments:</ion-label>
-          <ion-textarea position="floating" rows="0" [(ngModel)]="comments" name="comments" autoGrow="true" readonly>
-          </ion-textarea>
-        </ion-item>
-        <!-- <ion-button style="margin-left:40%;width:8cm" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button> -->
-        <ion-button expand="full" color="primary" (click)="addComment()">Add +</ion-button>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Websites:</ion-label>
-          <ion-textarea position="floating" rows="0" [(ngModel)]="websites" name="websites" autoGrow="true" readonly>
-          </ion-textarea>
-        </ion-item>
-        <ion-button expand="full" color="primary" (click)="addWebsite()">Add +</ion-button>
-      </ion-card>
-
-      <ion-card>
-          <ion-item>
-            <ion-label stacked>Social Networks:</ion-label>
-            <ion-textarea position="floating" rows="0" [(ngModel)]="socialNetworks" name="socialNetworks" autoGrow="true" readonly>
-            </ion-textarea>
-          </ion-item>
-          <ion-button expand="full" color="primary" (click)="addSocialNetworks()">Add +</ion-button>
-        </ion-card>
-
-      
-      <ion-card>
-          <ion-item>
-              <!-- [(ngModel)]="item.rating" -->
-              <ionic4-star-rating #rating name="rating"
-              activeIcon = "ios-star"
-              defaultIcon = "ios-star-outline"
-              activeColor = "#488aff" 
-              defaultColor = "#f4f4f4"
-              readonly="false"
-              rating={{item.rating}}
-              fontSize = "32px"
-              (ratingChanged)="logRatingChange($event)">
-          </ionic4-star-rating>
-            </ion-item>
-          </ion-card>
-
-          <ion-card>
-            <ion-item>
-              <ion-label stacked>Images:</ion-label>
-            </ion-item>
-            <ion-button expand="full" color="primary" (click)="addImage()">Add + {{imagesNumber}}</ion-button>
-          </ion-card>
-
-          <ion-card>
-              <ion-item>
-                  <ion-label position="stacked">Test:</ion-label>
-                  <ion-toggle [(ngModel)]="item.test" name="test"></ion-toggle>
-              </ion-item>
-          </ion-card>
-
-      <ion-row class="ion-text-center">
-        <ion-col col-6>
-          <ion-button expand="full" type="submit" color="success">Save</ion-button>
         </ion-col>
-        <ion-col col-6>
-          <ion-button expand="full" color="danger" routerLink="/kine-list">Cancel</ion-button>
+        <ion-col col-5>
+          <ion-label stacked>Longitude:</ion-label>
+          <ion-input position="floating" type="text" name="longitude" required clearInput [(ngModel)]="item.longitude"
+            placeholder="longitude">
+          </ion-input>
         </ion-col>
-      </ion-row>
+        <ion-icon name="map" item-start></ion-icon>
+      </ion-item>
+    </ion-card>
 
-    </form>
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Comments:</ion-label>
+        <ion-textarea position="floating" rows="0" [(ngModel)]="comments" name="comments" autoGrow="true" readonly>
+        </ion-textarea>
+      </ion-item>
+      <!-- <ion-button style="margin-left:40%;width:8cm" color="warning" (click)="onClickWebsites(item.id)">Add +</ion-button> -->
+      <ion-button expand="full" color="primary" (click)="addComment()">Add +</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Websites:</ion-label>
+        <ion-textarea position="floating" rows="0" [(ngModel)]="websites" name="websites" autoGrow="true" readonly>
+        </ion-textarea>
+      </ion-item>
+      <ion-button expand="full" color="primary" (click)="addWebsite()">Add +</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Social Networks:</ion-label>
+        <ion-textarea position="floating" rows="0" [(ngModel)]="socialNetworks" name="socialNetworks" autoGrow="true"
+          readonly>
+        </ion-textarea>
+      </ion-item>
+      <ion-button expand="full" color="primary" (click)="addSocialNetworks()">Add +</ion-button>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-item>
+        <!-- [(ngModel)]="item.rating" -->
+        <ionic4-star-rating #rating name="rating" activeIcon="ios-star" defaultIcon="ios-star-outline"
+          activeColor="#488aff" defaultColor="#f4f4f4" readonly="false" rating={{item.rating}} fontSize="32px"
+          (ratingChanged)="logRatingChange($event)">
+        </ionic4-star-rating>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label stacked>Images:</ion-label>
+      </ion-item>
+      <ion-button expand="full" color="primary" (click)="addImage()">Add + {{imagesNumber}}</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label position="stacked">Test:</ion-label>
+        <ion-toggle [(ngModel)]="item.test" name="test"></ion-toggle>
+      </ion-item>
+    </ion-card>
+
+    <ion-row class="ion-text-center">
+      <ion-col col-6>
+        <ion-button expand="full" type="submit" color="success">Save</ion-button>
+      </ion-col>
+      <ion-col col-6>
+        <ion-button expand="full" color="danger" routerLink="/kine-list">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
   <!-- </ion-grid> -->
 </ion-content>

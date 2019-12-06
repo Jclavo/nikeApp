@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'location', loadChildren: './pages/location/location.module#LocationPageModule' },
   { path: 'comment', loadChildren: './pages/comment/comment.module#CommentPageModule' },
   { path: 'modal-line', loadChildren: './pages/modal-line/modal-line.module#ModalLinePageModule' },
-  { path: 'image-gallery', loadChildren: './pages/image-gallery/image-gallery.module#ImageGalleryPageModule' },
+  { path: 'image-gallery', loadChildren: './pages/image-gallery/image-gallery.module#ImageGalleryPageModule' },  { path: 'modal-search', loadChildren: './pages/modal-search/modal-search.module#ModalSearchPageModule' },
+
 ];
 
 @NgModule({

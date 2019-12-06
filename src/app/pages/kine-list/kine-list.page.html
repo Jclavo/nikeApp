@@ -6,57 +6,49 @@
 
 <ion-content class="ion-padding">
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/kine">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <ion-list>
     <ion-item *ngFor="let item of items">
 
       <ion-grid>
         <ion-row>
           <ion-col>
-              Name : 
+            Name :
             <ion-label>
               {{ item.name }}
             </ion-label>
           </ion-col>
           <ion-col>
-              Phone : 
+            Phone :
             <ion-label>
-             {{ item.phone }}
+              {{ item.phone }}
             </ion-label>
           </ion-col>
           <ion-col>
-              Location : 
+            Location :
             <ion-label>
               {{ item.location }}
             </ion-label>
           </ion-col>
           <ion-col>
-            Price : 
-          <ion-label>
-            {{ item.price }}
-          </ion-label>
-        </ion-col>
-          <ion-col>
-              Rating : 
+            Price :
             <ion-label>
-             {{ item.rating }}
+              {{ item.price }}
             </ion-label>
           </ion-col>
-          <ion-col >
-              Pictures : {{ item.images.length }}
-              <ion-thumbnail *ngIf="item.images.length">
-                  <img src="{{constantService.PATH_IMAGES + item.images[0] }}">
-                </ion-thumbnail>
+          <ion-col>
+            Rating :
+            <ion-label>
+              {{ item.rating }}
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            Pictures : {{ item.images.length }}
+            <ion-thumbnail *ngIf="item.images.length">
+              <img src="{{constantService.PATH_IMAGES + item.images[0] }}">
+            </ion-thumbnail>
           </ion-col>
         </ion-row>
       </ion-grid>
-
-
 
       <ion-button title="Edit" [routerLink]="['/kine', item.id]">
         <ion-icon slot="icon-only" name="create"></ion-icon>
@@ -68,5 +60,20 @@
 
     </ion-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+    <ion-fab-button (click)="search()">
+      <ion-icon name="search" ></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button color="success">
+      <ion-icon name="map" ></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/kine">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-item>
+      <ion-label stacked>Name:</ion-label>
+      <ion-input position="floating" type="text" name="name" required clearInput [(ngModel)]="item.name"
+        placeholder="name" maxlength="50">
+      </ion-input>
+      <ion-icon name="person" item-start></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label stacked>Phone:</ion-label>
+      <ion-input position="floating" type="phone" name="phone" required clearInput [(ngModel)]="item.phone"
+        placeholder="phone" maxlength="15">
+      </ion-input>
+      <ion-icon name="phone-portrait" item-start></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label stacked>Price:</ion-label>
+      <ion-input position="floating" type="number" name="price" required clearInput [(ngModel)]="item.price"
+        placeholder="price">
+      </ion-input>
+      <ion-icon name="cash" item-start></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label stacked>Location:</ion-label>
+      <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)">
+        <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
+          {{location.name}}
+        </ion-select-option>
+      </ion-select>
+      <ion-icon name="pin" item-start></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Test:</ion-label>
+      <ion-toggle [(ngModel)]="item.test" name="test"></ion-toggle>
+    </ion-item>
+  </ion-card>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-button expand="full" color="success" (click)="dismiss()">Search</ion-button>
+      <ion-button expand="full" color="danger" (click)="dismiss()">Cancel</ion-button>
+    </ion-toolbar>
+  </ion-footer>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+
+//MODALS
+import { ModalSearchPage } from '../modal-search/modal-search.page';
 
 //MODELS
-import { ItemModel, ItemListModel } from '../../models/item.model';
+import { ItemListModel } from '../../models/item.model';
 import { LocationModel } from '../../models/location.model';
 
 //SERVICES
@@ -27,6 +30,7 @@ export class KineListPage implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private alertController: AlertController,
+    private modalController: ModalController,
     private progressIndicatorService: ProgressIndicatorService,
     private constantService: ConstantService,
     private locationService: LocationService) {
@@ -142,6 +146,41 @@ export class KineListPage implements OnInit {
     if(locationFind.length > 0)
     {
       return locationFind[0].name;
+    }
+  }
+
+  _search(item: ItemListModel) {
+
+    this.itemService.search(item).subscribe(dataItemSearched => {
+      
+      console.log('search',dataItemSearched);
+
+      // if (dataLocations.length) {
+      //   this.locations = dataLocations;
+      // }
+     
+    });
+  }
+
+  async search() {
+    const modal = await this.modalController.create({
+      component: ModalSearchPage,
+      // componentProps: {
+      //   'title': 'SocialNetworks',
+      //   'linesInput': this.item.socialNetworks
+      // }
+    });
+
+    await modal.present();
+
+    // get data 
+    const { data } = await modal.onWillDismiss();
+    
+    if(data === undefined) return;
+    if (data.itemSearched) {
+     console.log('itemSearched: ',data.itemSearched);
+     this._search(data.itemSearched);
+      //this.item.socialNetworks = data.linesOutput;
     }
   }
 }

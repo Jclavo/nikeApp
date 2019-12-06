@@ -3,7 +3,7 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 
-import { ItemModel } from '../../models/item.model';
+import { ItemModel, ItemListModel } from '../../models/item.model';
 import { ConstantService } from '../constant.service';
 
 //Helpers
@@ -126,6 +126,51 @@ export class ItemService {
   delete(id: string): Promise<void> {
     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS).doc(id).delete();
   }
+
+
+  search(item: ItemListModel): Observable<ItemModel[]> {
+
+    // https://firebase.google.com/docs/reference/js/firebase.database.Query
+    // https://medium.com/android-dev-moz/firebasesql-8bab8efd1e95
+
+    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS,
+      //ref => ref.where("name", "==", item.name)) // WHERE
+      ref => ref.orderBy('name').startAt(item.name).endAt(item.name+"\uf8ff")) // LIKE
+      
+
+
+      .snapshotChanges()
+      .pipe(map(res => {
+
+        this.resultRAW = res;
+
+        return this.resultObservable = this.resultRAW.map(itemData => {
+
+          return this.createItem(
+            itemData.payload.doc.id,
+            itemData.payload.doc.data().name,
+            itemData.payload.doc.data().phone,
+            itemData.payload.doc.data().address,
+            itemData.payload.doc.data().price,
+            itemData.payload.doc.data().location,
+            itemData.payload.doc.data().latitude,
+            itemData.payload.doc.data().longitude,
+            itemData.payload.doc.data().comments,
+            itemData.payload.doc.data().websites,
+            itemData.payload.doc.data().socialNetworks,
+            itemData.payload.doc.data().rating,
+            itemData.payload.doc.data().images,
+            itemData.payload.doc.data().test
+          );
+
+        });
+      }));
+  }
+
+
+
+
+
 
   private createItem(id: string,
     name: string,

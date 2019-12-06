@@ -16,13 +16,16 @@ import { environment } from '../environments/environment';
 import { HttpClientModule} from '@angular/common/http';
 import { ModalLinePage  } from './pages/modal-line/modal-line.page';
 import { ImageGalleryPage } from './pages/image-gallery/image-gallery.page';
+import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
 //Helpers
 import { Validation } from './helpers/validations';
 
 @NgModule({
-  declarations: [AppComponent,ModalLinePage, ImageGalleryPage],
-  entryComponents: [ModalLinePage, ImageGalleryPage],
+  declarations: [AppComponent,ModalLinePage, ImageGalleryPage, ModalSearchPage],
+
+  entryComponents: [ModalLinePage, ImageGalleryPage, ModalSearchPage],
+
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebaseConfig),
             AngularFirestoreModule,FormsModule,HttpClientModule],
