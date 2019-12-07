@@ -39,7 +39,7 @@
   <ion-card>
     <ion-item>
       <ion-label stacked>Location:</ion-label>
-      <ion-select [(ngModel)]="item.location" name="location" (ionChange)="selectLocation(item.location)">
+      <ion-select [(ngModel)]="item.location" name="location">
         <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
           {{location.name}}
         </ion-select-option>
@@ -48,19 +48,64 @@
     </ion-item>
   </ion-card>
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-item>
       <ion-label position="stacked">Test:</ion-label>
       <ion-toggle [(ngModel)]="item.test" name="test"></ion-toggle>
     </ion-item>
+  </ion-card> -->
+
+  <ion-card>
+    <ion-card-content>
+      <ion-radio-group [(ngModel)]="option" name="genre">
+        <ion-list-header>
+          <ion-label>Option</ion-label>
+        </ion-list-header>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-radio slot="start" value="1" checked></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Phone</ion-label>
+              <ion-radio slot="start" value="2"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Price</ion-label>
+              <ion-radio slot="start" value="3"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Location</ion-label>
+              <ion-radio slot="start" value="4"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Test</ion-label>
+              <ion-radio slot="start" value="5"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+      </ion-radio-group>
+    </ion-card-content>
   </ion-card>
 
 
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar>
-      <ion-button expand="full" color="success" (click)="dismiss()">Search</ion-button>
-      <ion-button expand="full" color="danger" (click)="dismiss()">Cancel</ion-button>
-    </ion-toolbar>
-  </ion-footer>
+
+  <ion-toolbar>
+    <ion-button expand="full" color="success" (click)="search()">Search</ion-button>
+    <ion-button expand="full" color="danger" (click)="dismiss()">Cancel</ion-button>
+  </ion-toolbar>
+</ion-footer>

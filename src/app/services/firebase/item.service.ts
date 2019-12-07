@@ -72,7 +72,7 @@ export class ItemService {
           itemData.rating,
           itemData.images,
           itemData.test
-          )
+        )
 
       }));
   }
@@ -128,17 +128,13 @@ export class ItemService {
   }
 
 
-  search(item: ItemListModel): Observable<ItemModel[]> {
+  search(item: ItemListModel, option: string): Observable<ItemModel[]> {
 
     // https://firebase.google.com/docs/reference/js/firebase.database.Query
     // https://medium.com/android-dev-moz/firebasesql-8bab8efd1e95
 
-    return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS,
-      //ref => ref.where("name", "==", item.name)) // WHERE
-      ref => ref.orderBy('name').startAt(item.name).endAt(item.name+"\uf8ff")) // LIKE
-      
-
-
+     return this.afs.collection(this.constant.COLLECTION_NAME_ITEMS,
+      refQuery => this.setQueryByOption(refQuery, option, item) ) 
       .snapshotChanges()
       .pipe(map(res => {
 
@@ -167,10 +163,31 @@ export class ItemService {
       }));
   }
 
-
-
-
-
+  setQueryByOption(query, option, item)
+  {
+    switch (option) {
+      case "1": // Name
+        //Query like
+        return query.orderBy('name').startAt(item.name).endAt(item.name + "\uf8ff");
+      case "2": // Phone
+        //Query like
+        return query.orderBy('phone').startAt(item.phone).endAt(item.phone + "\uf8ff");
+      case "3": // Price
+        // Query (Less than <)  
+        return query.orderBy('price').endAt(item.price);
+      case "4": // Location
+        // Query Equal
+        return query.where('location', "==", item.location);
+      case "5": // Test
+        // Query Equal (another way)
+        return query.where('test', "==", true);
+        //return query.orderBy('test').equalTo(true);
+      default:
+        return;
+      // code block
+    }
+    
+  }
 
   private createItem(id: string,
     name: string,

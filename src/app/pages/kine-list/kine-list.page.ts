@@ -43,16 +43,15 @@ export class KineListPage implements OnInit {
     this.getAll();
   }
 
-  async getAll()
-  {
+  async getAll() {
     let these = this; //Donot do at home
 
     const loading = await this.progressIndicatorService.createLoading();
     loading.present();
-    
+
     this.itemService.getAll().subscribe(dataItems => {
       if (dataItems.length) {
-        this.items = dataItems;
+        //this.items = dataItems;
 
         this.items = dataItems.map(function callback(value) {
 
@@ -76,9 +75,8 @@ export class KineListPage implements OnInit {
 
         //console.log('Items ',dataItems);
       }
-      else
-      {
-        this.alertService.presentToast('Data not found .....');  
+      else {
+        this.alertService.presentToast('Data not found .....');
       }
       loading.dismiss();
     }, error => {
@@ -109,8 +107,7 @@ export class KineListPage implements OnInit {
     await alert.present();
   }
 
-  private async delete(id: string)
-  {
+  private async delete(id: string) {
     const loading = await this.progressIndicatorService.createLoading();
     loading.present();
 
@@ -129,40 +126,52 @@ export class KineListPage implements OnInit {
       if (dataLocations.length) {
         this.locations = dataLocations;
       }
-     
+
     });
   }
 
 
-  getLocationNameByID(id: string):string
-  {
+  getLocationNameByID(id: string): string {
     let locationFind: Array<LocationModel>;
-    
+
     locationFind = this.locations.filter(function (value, index, array) {
-      if(value.id == id) 
-       return value;    
+      if (value.id == id)
+        return value;
     });
 
-    if(locationFind.length > 0)
-    {
+    if (locationFind.length > 0) {
       return locationFind[0].name;
     }
   }
 
-  _search(item: ItemListModel) {
+  search(item: ItemListModel, option: string) {
 
-    this.itemService.search(item).subscribe(dataItemSearched => {
-      
-      console.log('search',dataItemSearched);
+    let these = this;
 
-      // if (dataLocations.length) {
-      //   this.locations = dataLocations;
-      // }
-     
+    this.itemService.search(item, option).subscribe(dataItemSearched => {
+
+      this.items = dataItemSearched.map(function callback(value) {
+
+        let item = new ItemListModel();
+
+        item.id = value.id;
+        item.name = value.name;
+        item.phone = value.phone;
+        item.address = value.address;
+        item.price = value.price;
+        //item.location = value.location;getLocationNameByID
+        item.location = these.getLocationNameByID(value.location);
+
+        item.rating = value.rating;
+        item.images = value.images;
+        item.test = value.test;
+        return item;
+
+      });
     });
   }
 
-  async search() {
+  async openModalSearch() {
     const modal = await this.modalController.create({
       component: ModalSearchPage,
       // componentProps: {
@@ -175,12 +184,11 @@ export class KineListPage implements OnInit {
 
     // get data 
     const { data } = await modal.onWillDismiss();
-    
-    if(data === undefined) return;
+
+    if (data === undefined) return;
+    if (data.option === undefined) return;
     if (data.itemSearched) {
-     console.log('itemSearched: ',data.itemSearched);
-     this._search(data.itemSearched);
-      //this.item.socialNetworks = data.linesOutput;
+      this.search(data.itemSearched, data.option);
     }
   }
 }

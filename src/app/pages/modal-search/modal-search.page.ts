@@ -20,6 +20,8 @@ export class ModalSearchPage implements OnInit {
   private locations: Array<LocationModel>;
   private item = new ItemListModel();
 
+  private option: string = "0";
+
   constructor(private itemService: ItemService,
     private locationService: LocationService,
     private alertService: AlertService,
@@ -28,7 +30,7 @@ export class ModalSearchPage implements OnInit {
   ngOnInit() {
 
     this.getAllActiveLocations();
-  } 
+  }
 
   getAllActiveLocations() {
 
@@ -39,10 +41,34 @@ export class ModalSearchPage implements OnInit {
     });
   }
 
+  search() {
+    let dataOK: boolean = false;
+    switch (this.option) {
+      case "1": // Name
+        this.item.name ? dataOK = true : null;
+        break;
+      case "2": // Phone
+        this.item.phone ? dataOK = true : null;
+      case "3": // Price
+        this.item.price ? dataOK = true : null;
+      case "4": // Location
+        this.item.location ? dataOK = true : null;
+      case "5":
+        dataOK = true
+        // code block
+        break;
+      default:
+      // code block
+    }
+
+    dataOK ? this.dismiss() : this.alertService.presentToast('Choose an option and fullfil data..');;
+  }
+
   dismiss() {
 
     this.modalController.dismiss({
-      'itemSearched': this.item
+      'itemSearched': this.item,
+      'option': this.option
     });
   }
 

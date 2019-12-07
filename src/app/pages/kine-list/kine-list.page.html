@@ -63,12 +63,16 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 
-    <ion-fab-button (click)="search()">
-      <ion-icon name="search" ></ion-icon>
+    <ion-fab-button color="success" (click)="getAll()">
+      <ion-icon name="refresh"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="openModalSearch()">
+      <ion-icon name="search"></ion-icon>
     </ion-fab-button>
 
     <ion-fab-button color="success">
-      <ion-icon name="map" ></ion-icon>
+      <ion-icon name="map"></ion-icon>
     </ion-fab-button>
 
     <ion-fab-button routerLink="/kine">

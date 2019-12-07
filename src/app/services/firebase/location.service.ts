@@ -33,9 +33,9 @@ export class LocationService {
           return new LocationModel(
             locationData.payload.doc.id,
             locationData.payload.doc.data().name,
-            locationData.payload.doc.data().phone,
-            locationData.payload.doc.data().address,
-            locationData.payload.doc.data().price
+            locationData.payload.doc.data().latitude,
+            locationData.payload.doc.data().longitude,
+            locationData.payload.doc.data().active
           );
 
         });
@@ -56,9 +56,9 @@ export class LocationService {
           return new LocationModel(
             locationData.payload.doc.id,
             locationData.payload.doc.data().name,
-            locationData.payload.doc.data().phone,
-            locationData.payload.doc.data().address,
-            locationData.payload.doc.data().price
+            locationData.payload.doc.data().latitude,
+            locationData.payload.doc.data().longitude,
+            locationData.payload.doc.data().active
           );
 
         });
