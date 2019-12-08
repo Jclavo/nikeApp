@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'comment', loadChildren: './pages/comment/comment.module#CommentPageModule' },
   { path: 'modal-line', loadChildren: './pages/modal-line/modal-line.module#ModalLinePageModule' },
   { path: 'image-gallery', loadChildren: './pages/image-gallery/image-gallery.module#ImageGalleryPageModule' },
-  { path: 'modal-search', loadChildren: './pages/modal-search/modal-search.module#ModalSearchPageModule' },
+  { path: 'modal-search', loadChildren: './pages/modal-search/modal-search.module#ModalSearchPageModule' },  { path: 'map', loadChildren: './pages/map/map.module#MapPageModule' },
+
 ];
 
 @NgModule({
