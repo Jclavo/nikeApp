@@ -1,9 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-align-self-center">
+        <div class="ion-padding">
+          <form #form="ngForm" method="post">
+            <ion-item>
+              <ion-input type="email" placeholder="Email" [(ngModel)]="user.email" name="email"></ion-input>
+            </ion-item>
+
+            <ion-item >
+              <ion-input type="password" placeholder="Password" [(ngModel)]="user.password" name="password"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="registerFlag" >
+              <ion-input type="password" placeholder="Retype Password" [(ngModel)]="user.repassword" name="repassword">
+              </ion-input>
+            </ion-item>
+
+          </form>
+        </div>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col *ngIf="!registerFlag" col-6>
+        <ion-button expand="full" (click)=login()>Login</ion-button>
+      </ion-col>
+      <ion-col *ngIf="registerFlag" col-6>
+        <ion-button expand="full" (click)=register()>Register</ion-button>
+      </ion-col>
+      <ion-col *ngIf="registerFlag" col-6>
+        <ion-button expand="full" color="danger" (click)=cancel()>Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!registerFlag" class="ion-text-right">
+        <ion-col col-6>
+            <ion-button size="small" color="success" (click)=activateRegister()>Create an account?</ion-button>
+          </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>
