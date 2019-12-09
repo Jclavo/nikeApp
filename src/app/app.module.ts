@@ -20,6 +20,7 @@ import { ModalLinePage  } from './pages/modal-line/modal-line.page';
 import { ImageGalleryPage } from './pages/image-gallery/image-gallery.page';
 import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx'; 
 //Helpers
 import { Validation } from './helpers/validations';
 
@@ -35,7 +36,8 @@ import { Validation } from './helpers/validations';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Validation
+    Validation,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })

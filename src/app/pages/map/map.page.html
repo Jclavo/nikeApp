@@ -1,9 +1,44 @@
+<head>
+  <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet">
+</head>
+
 <ion-header>
-  <ion-toolbar>
-    <ion-title>map</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Map</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <div id="mapId" style="width: 100%; height: 100%">
+  </div>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-row>
+      <ion-col col-8>
+        <ion-card>
+          <ion-item>
+            <ion-label stacked>Location:</ion-label>
+            <ion-select [(ngModel)]="location" name="location" (ionChange)="selectLocation(location)">
+              <ion-select-option *ngFor="let location of locations" value="{{location.id}}">
+                {{location.name}}
+              </ion-select-option>
+            </ion-select>
+            <ion-icon name="pin" item-start></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col col-4>
+        <ion-button expand="full" color="success">
+          <ion-icon slot="icon-only" name="pin"></ion-icon>
+          Near me
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-footer>

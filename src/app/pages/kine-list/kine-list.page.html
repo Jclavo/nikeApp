@@ -81,3 +81,22 @@
   </ion-fab>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" color="primary">
+
+        <ion-tab-button disabled="true">
+          <ion-icon name="albums"></ion-icon>
+          <ion-label>List</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="openMap()">
+          <ion-icon name="pin"></ion-icon>
+          <ion-label>Map</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

@@ -52,6 +52,7 @@ export class KineListPage implements OnInit {
     this.itemService.getAll().subscribe(dataItems => {
       if (dataItems.length) {
         //this.items = dataItems;
+        console.log('dataItems',dataItems);
 
         this.items = dataItems.map(function callback(value) {
 
@@ -190,5 +191,10 @@ export class KineListPage implements OnInit {
     if (data.itemSearched) {
       this.search(data.itemSearched, data.option);
     }
+  }
+
+  openMap()
+  {
+    this.router.navigate(['/map']);
   }
 }

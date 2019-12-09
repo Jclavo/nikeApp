@@ -56,6 +56,8 @@ export class ItemListModel {
     public address: string;
     public price: number;
     public location: string;
+    public latitude: string;
+    public longitude: string;
     public rating: number;
     public images: Array<string>;
     public test: boolean;
