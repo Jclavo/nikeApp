@@ -82,9 +82,9 @@ export class MapPage implements OnInit {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    this.createMarker(latitude, longitude);
+    this.createMarker(latitude, longitude, this.createPopupMessage('0','Me', '0.0'));
 
-   }
+  }
 
   // createMarker(latitude: any, longitude: any) {
 
@@ -94,9 +94,34 @@ export class MapPage implements OnInit {
   //   this.currentMarker = leaflet.marker([latitude, longitude]).addTo(this.map);
   // }
 
-  createMarker(latitude: any, longitude: any) {
-    //Add new markers
-    this.markers.push(leaflet.marker([latitude, longitude]).addTo(this.map));
+  createMarker(latitude: any, longitude: any, popupMessage: string) {
+
+    let indexMarker = this.markers.findIndex(function (currentValue, index, arr) {
+      if (currentValue._latlng.lat == latitude && currentValue._latlng.lng == longitude)
+        return index;
+    }, this)
+
+
+    if (indexMarker == -1) {
+      //Add new markers
+      this.markers.push(
+        leaflet.marker([latitude, longitude]).addTo(this.map)
+          .bindPopup(popupMessage)
+          // .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        //.openPopup()
+      );
+    }
+    else
+    {
+      this.markers[indexMarker]._popup._content = this.markers[indexMarker]._popup._content + '<br>' + popupMessage;
+    }
+
+  }
+
+  createPopupMessage(id: string, name: string, price: any)
+  {
+    // return '<b>ID:</b> ' + id + ' <b>Name:</b> ' + name + ' <b>Price:</b> ' + price ;
+    return '<b>Name:</b> ' + name + ' <b>Price:</b> ' + price ;
   }
 
   removeAllMarkers() {
@@ -111,11 +136,14 @@ export class MapPage implements OnInit {
   }
 
   loadMarkers() {
-    
+
     this.removeAllMarkers();
 
     for (let i = 0; i < this.items.length; i++) {
-      this.createMarker(this.items[i].latitude, this.items[i].longitude);
+      this.createMarker(
+        this.items[i].latitude, this.items[i].longitude, 
+        this.createPopupMessage(this.items[i].id, this.items[i].name, this.items[i].price)
+        );
     }
 
   }
