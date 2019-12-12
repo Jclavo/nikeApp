@@ -121,7 +121,11 @@ export class MapPage implements OnInit {
   createPopupMessage(id: string, name: string, price: any)
   {
     // return '<b>ID:</b> ' + id + ' <b>Name:</b> ' + name + ' <b>Price:</b> ' + price ;
-    return '<b>Name:</b> ' + name + ' <b>Price:</b> ' + price ;
+    let popupMessage: string = "";
+    if(id == "0") popupMessage = '<b>Name:</b>' + name;
+    else popupMessage = '<b>Name:</b> <a href="/kine/' + id + '" target="_blank">' + name + '</a>';
+
+    return popupMessage + ' <b>Price:</b> ' + price ;
   }
 
   removeAllMarkers() {
